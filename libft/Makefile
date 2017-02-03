@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 12:34:13 by jlasne            #+#    #+#              #
-#    Updated: 2016/12/13 15:21:38 by jlasne           ###   ########.fr        #
+#    Updated: 2017/02/03 16:34:02 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,7 +131,8 @@ SRC = ft_bzero.c\
 	  ft_putnwchar.c\
 	  ft_putwchar.c\
 	  ft_putnstr.c\
-	  ft_itoa_base_uint.c
+	  ft_itoa_base_uint.c\
+	  get_next_line.c
 
 OBJ = $(SRC:.c=.o)
 
