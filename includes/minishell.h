@@ -6,7 +6,7 @@
 /*   By: blucas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 12:02:48 by blucas            #+#    #+#             */
-/*   Updated: 2017/02/03 16:35:04 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/04 13:15:21 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,9 @@
 # define MINISHELL_H
 
 # include "../libft/includes/libft.h"
+
+char	**str_to_wordtab(char *str);
+char	**path_parser(char **envrion);
+char	**str_to_tab_sep(char *str, char separator, int opt);
 
 #endif

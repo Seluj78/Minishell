@@ -6,13 +6,16 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/02/03 16:08:16 by jlasne           ###   ########.fr        #
+#    Updated: 2017/02/04 13:14:50 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRC =	main.c
+SRC =	main.c\
+		cmd_parser.c\
+		path_parser.c\
+		str_to_tab_sep.c
 
 OBJ = $(SRC:.c=.o)
 
