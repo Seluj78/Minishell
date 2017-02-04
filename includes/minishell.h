@@ -15,6 +15,7 @@
 # define MINISHELL_H
 
 # include "../libft/includes/libft.h"
+# include "/usr/include/stdint.h"
 
 char	**str_to_wordtab(char *str);
 char	**path_parser(char **envrion);

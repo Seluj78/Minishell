@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "get_next_line.h"
+# include <stdint.h>
 
 typedef struct	s_list
 {
