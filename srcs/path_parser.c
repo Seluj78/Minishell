@@ -135,6 +135,7 @@ char	**path_parser(char **env, t_data *data)
 			tab = str_to_tab_sep(path, ':', 0);
 	}
 	data->nb_bin = count_path_size(path, ':');
+	//ft_printf("\nComplete path : %s\n last path : %s\n", path, tab[data->nb_bin - 1]);
 	free(path);
 	//ft_printf("\nnb de : => %d \n", data->nb_bin);
 	return (tab);
