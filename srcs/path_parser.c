@@ -102,7 +102,23 @@ static char	**do_absolute(void)
 	return (tab);
 }
 
-char	**path_parser(char **env)
+int 	count_path_size(char *path, char sep)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (path[i] != '\0')
+	{
+		if (path[i] == sep)
+			count++;
+		i++;
+	}
+	return (count + 1);
+}
+
+char	**path_parser(char **env, t_data *data)
 {
 	char	**tab;
 	char	*path = NULL;
@@ -118,7 +134,8 @@ char	**path_parser(char **env)
 		else
 			tab = str_to_tab_sep(path, ':', 0);
 	}
-	//ft_printf("%s", path);
+	data->nb_bin = count_path_size(path, ':');
 	free(path);
+	//ft_printf("\nnb de : => %d \n", data->nb_bin);
 	return (tab);
 }

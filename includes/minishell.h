@@ -18,7 +18,14 @@
 # include "/usr/include/stdint.h"
 
 char	**str_to_wordtab(char *str);
-char	**path_parser(char **envrion);
 char	**str_to_tab_sep(char *str, char separator, int opt);
+
+
+typedef struct  s_data
+{
+	int nb_bin;
+}                               t_data;
+
+char	**path_parser(char **envrion, t_data *data);
 
 #endif
