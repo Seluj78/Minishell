@@ -42,9 +42,9 @@ int		main(int argc, char **argv, char **environ)
 	{
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 		cmd = str_to_wordtab(line);
-		ft_printf("1 : %s   2 : %s   3 : %s", cmd[0], cmd[1], cmd[2]);
+		//ft_printf("1 : %s   2 : %s   3 : %s", cmd[0], cmd[1], cmd[2]);
 		bin = path_parser(environ);
-		test_path_access(bin);
+		//test_path_access(bin);
 		//ft_printf("%d", access(bin[0], X_OK));
 		//ft_printf("1 : %s   2 : %s   3 : %s", bin[0], bin[1], bin[2]);
 	}
@@ -58,7 +58,8 @@ int		main(int argc, char **argv, char **environ)
 
 
 
-/*  -- > faire une fonction qui recupere uns a uns les paths dans cet elem
+/*
+	-- > faire une fonction qui recupere uns a uns les paths dans cet elem
     -- > faire une fonction qui ajoute a la suite du path recupere le
   element du tableau de str_to_wordtab.
     Tester ces paths avec la fonction access. Comment elle marche ? -> man

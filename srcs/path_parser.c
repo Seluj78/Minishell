@@ -118,6 +118,7 @@ char	**path_parser(char **env)
 		else
 			tab = str_to_tab_sep(path, ':', 0);
 	}
+	//ft_printf("%s", path);
 	free(path);
 	return (tab);
 }

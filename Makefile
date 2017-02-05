@@ -15,7 +15,7 @@ NAME = minishell
 SRC =	main.c\
 		cmd_parser.c\
 		path_parser.c\
-		str_to_tab_sep.c
+		break_str_to_tab_sep.c
 
 OBJ = $(SRC:.c=.o)
 
