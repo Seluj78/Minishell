@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/04 13:32:18 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/08 16:09:48 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	test_path_access(char **bin, int size)
 
 		i = 0;
 		while (i < size)
-		{/*
+		{
 			if (access(bin[i], F_OK) != 0)
 			{
 					ft_printf("\nErreur : le chemin du path '%s' n'existe pas", bin[i]);
 					exit(EXIT_FAILURE);
-			}*/
-			ft_printf("%s\n", bin[i]);
+			}
+			//ft_printf("%s\n", bin[i]);
 			i++;
 		}
 }
@@ -46,6 +46,7 @@ int		main(int argc, char **argv, char **environ)
 		char	*line;
 		char	**cmd;
 		char	**bin;
+		pid_t	father;
 
 		t_data data;
 		data.nb_bin = 0;
@@ -56,17 +57,15 @@ int		main(int argc, char **argv, char **environ)
 		{
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 				cmd = str_to_wordtab(line);
-				//ft_printf("1 : %s   2 : %s   3 : %s", cmd[0], cmd[1], cmd[2]);
 				bin = path_parser(environ, &data);
-				//ft_printf("%d", data.nb_bin);
 				test_path_access(bin, data.nb_bin);
-				//ft_printf("%d", access(bin[0], X_OK));
-				//ft_printf("1 : %s   2 : %s   3 : %s", bin[0], bin[1], bin[2]);
+				father = fork();
+
 		}
 		return (0);
 }
 
-
+// TODO : Add cmd[0] to end of each bin[X]
 
 
 

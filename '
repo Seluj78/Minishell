@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 12:57:41 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/08 16:09:48 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/08 12:53:20 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,20 +118,8 @@ int 	count_path_size(char *path, char sep)
 	return (count + 1);
 }
 
-char **add_bin_to_tab(char **tab, char *bin);
-{
-	char *tmp;
+char **add_bin_to_tab(char **tab);
 
-	while (x < path_size)
-	{
-		tmp = ft_strnew(ft_strlen(tab[x]) + ft_strlen(bin));
-		tmp = ft_strjoin(tab[x], bin);
-		tab[x] = tmp
-		x++;
-	}
-	free(tmp);
-	return (tab)
-}
 char	**path_parser(char **env, t_data *data)
 {
 	char	**tab;
@@ -151,6 +139,5 @@ char	**path_parser(char **env, t_data *data)
 	data->nb_bin = count_path_size(path, ':');
 	free(path);
 	//TODO : ADD cmd[0] at end of each path
-	//return (add_bin_to_tab(tab));
-	return (tab);
+	return (add_bin_to_tab(tab));
 }
