@@ -34,7 +34,7 @@ void	test_path_access(char **bin, int size)
 			if (access(bin[i], F_OK) != 0)
 			{
 					ft_printf("\nErreur : le chemin du path '%s' n'existe pas", bin[i]);
-					exit(EXIT_FAILURE);
+					//exit(EXIT_FAILURE);
 			}
 			//ft_printf("%s\n", bin[i]);
 			i++;
