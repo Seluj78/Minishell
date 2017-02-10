@@ -118,26 +118,55 @@ int 	count_path_size(char *path, char sep)
 		return (count + 1);
 }
 
-
-
-char **add_bin_to_tab(char **tab, char *bin)
+char		*ft_strjoin_sep(char *s1, char *sep, char *s2)
 {
-		char *tmp;
+		char	*str;
+		int		len;
+		int		i;
 
-		while (x < path_size)
+		i = -1;
+		len = ft_strlen((char*)s1) + ft_strlen((char*)s2) + ft_strlen(sep) + 1;
+		if (!(str = (char*)malloc(sizeof(char) * len)))
+				return (NULL);
+		while (*s1)
 		{
-				tmp = ft_strnew(ft_strlen(tab[x]) + ft_strlen(bin));
-				tmp = ft_strjoin(tab[x], bin);
-				tab[x] = tmp
-						x++;
+				str[++i] = *s1;
+				s1++;
 		}
-		free(tmp);
-		return (tab)
+		while (*sep)
+		{
+				str[++i] = *sep;
+				sep++;
+		}
+		while (*s2)
+		{
+				str[++i] = *s2;
+				s2++;
+		}
+		str[++i] = '\0';
+		return (str);
+}
+
+char **add_bin_to_tab(char **tab, char *bin, int nb_bin)
+{
+		char	*tmp;
+		int i;
+
+		i = 0;
+		while (i < nb_bin)
+		{
+			tmp = ft_strjoin_sep(tab[i], "/", bin);
+			tab[i] = ft_strdup(tmp);
+			//ft_printf("%s\n", tab[i]);
+			free(tmp);
+			i++;
+		}
+		return (tab);
 }
 
 
 
-char	**path_parser(char **env, t_data *data)
+char	**path_parser(char **env, t_data *data, char *bin)
 {
 		char	**tab;
 		char	*path = NULL;
@@ -155,7 +184,5 @@ char	**path_parser(char **env, t_data *data)
 		}
 		data->nb_bin = count_path_size(path, ':');
 		free(path);
-		//TODO : ADD cmd[0] at end of each path
-		//return (add_bin_to_tab(tab));
-		return (tab);
+		return (add_bin_to_tab(tab, bin, data->nb_bin));
 }

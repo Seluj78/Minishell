@@ -26,6 +26,6 @@ typedef struct  s_data
 	int nb_bin;
 }                               t_data;
 
-char	**path_parser(char **envrion, t_data *data);
+char	**path_parser(char **envrion, t_data *data, char *bin);
 
 #endif

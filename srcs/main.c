@@ -24,29 +24,36 @@
    }
  */
 
-void	test_path_access(char **bin, int size)
+void	test_path_access(char **path, int size, char *bin)
 {
 		int i;
+		int ok;
 
+		ok = -1;
 		i = 0;
 		while (i < size)
 		{
-			if (access(bin[i], F_OK) != 0)
+			if (access(path[i], F_OK) == 0)
 			{
-					ft_printf("\nErreur : le chemin du path '%s' n'existe pas", bin[i]);
-					//exit(EXIT_FAILURE);
+				ok = i;
 			}
-			//ft_printf("%s\n", bin[i]);
 			i++;
 		}
+		if (ok != -1)
+		{
+			//ft_printf("Command found in %d of path[i]\n", ok);
+			//return ...
+		}
+		else
+			ft_printf("Minishell : command not found: %s\n", bin);
 }
 
 int		main(int argc, char **argv, char **environ)
 {
 		char	*line;
 		char	**cmd;
-		char	**bin;
-		pid_t	father;
+		char	**path;
+//		pid_t	father;
 
 		t_data data;
 		data.nb_bin = 0;
@@ -57,11 +64,14 @@ int		main(int argc, char **argv, char **environ)
 		{
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 				cmd = str_to_wordtab(line);
-				bin = path_parser(environ, &data);
-				test_path_access(bin, data.nb_bin);
-				father = fork();
+				path = path_parser(environ, &data, cmd[0]);
+				test_path_access(path, data.nb_bin, cmd[0]);
+				//father = fork();
 
 		}
+		//free_chartab(path, data.nb_bin);
+		//free_chartab(cmd, data.nb_bin);
+		//free()
 		return (0);
 }
 
@@ -72,12 +82,6 @@ int		main(int argc, char **argv, char **environ)
 
 
 
-/*
-   -- > faire une fonction qui recupere uns a uns les paths dans cet elem
-   -- > faire une fonction qui ajoute a la suite du path recupere le
-   element du tableau de str_to_wordtab.
-   Tester ces paths avec la fonction access. Comment elle marche ? -> man
- */
 
 /*
    ETAPE 3 LANCER UN PROGRAMME - FORKER
