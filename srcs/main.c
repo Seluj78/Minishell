@@ -78,26 +78,28 @@ int		main(int argc, char **argv, char **environ)
 		char	**path;
 //		pid_t	father;
 
+		(void)environ;
 		t_data data;
 		data.nb_bin = 0;
 		(void)argc;
 		(void)argv;
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+		path = path_parser(environ, &data);
 		while (get_next_line(0, &line))
 		{
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 				cmd = str_to_wordtab(line);
-				path = path_parser(environ, &data, cmd[0]);
+				path = add_bin_to_tab(path, cmd[0], data.nb_bin);
 				test_path_access(path, data.nb_bin, cmd[0]);
 				//father = fork();
 		}
-		free_chartab(path, data.nb_bin);
-		free_chartab(cmd, ft_tablen(cmd));
-		free(line);
+		//free_chartab(path, data.nb_bin);
+		//free_chartab(cmd, ft_tablen(cmd));
+		//free(line);
 		return (0);
 }
-
-// TODO : Add cmd[0] to end of each bin[X]
+// TODO : Duplicate the path into a tmp var because if i type twice ls it'll endup with /usb/bin/ls/ls
+// TODO : add bin at end of path and parse the path in different functions so i can free it correctly
 
 
 

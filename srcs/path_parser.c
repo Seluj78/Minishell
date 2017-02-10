@@ -166,7 +166,7 @@ char **add_bin_to_tab(char **tab, char *bin, int nb_bin)
 
 
 
-char	**path_parser(char **env, t_data *data, char *bin)
+char	**path_parser(char **env, t_data *data)
 {
 		char	**tab;
 		char	*path = NULL;
@@ -184,5 +184,6 @@ char	**path_parser(char **env, t_data *data, char *bin)
 		}
 		data->nb_bin = count_path_size(path, ':');
 		free(path);
-		return (add_bin_to_tab(tab, bin, data->nb_bin));
+		//return (add_bin_to_tab(tab, bin, data->nb_bin));
+		return (tab);
 }
