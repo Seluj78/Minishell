@@ -48,6 +48,29 @@ void	test_path_access(char **path, int size, char *bin)
 			ft_printf("Minishell : command not found: %s\n", bin);
 }
 
+void	free_chartab(char **tab, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+int		ft_tablen(char **tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i] != '\0')
+		i++;
+	return (i);
+}
+
 int		main(int argc, char **argv, char **environ)
 {
 		char	*line;
@@ -67,11 +90,10 @@ int		main(int argc, char **argv, char **environ)
 				path = path_parser(environ, &data, cmd[0]);
 				test_path_access(path, data.nb_bin, cmd[0]);
 				//father = fork();
-
 		}
-		//free_chartab(path, data.nb_bin);
-		//free_chartab(cmd, data.nb_bin);
-		//free()
+		free_chartab(path, data.nb_bin);
+		free_chartab(cmd, ft_tablen(cmd));
+		free(line);
 		return (0);
 }
 
@@ -105,7 +127,7 @@ int		main(int argc, char **argv, char **environ)
 
 /*
    et voila ! On a lance un programme a partir de notre minishell.
-   Maintenant, on a quelques builtins a realiser. 
+   Maintenant, on a quelques builtins a realiser.
    env, setenv et unsetenv. Le mieux serait de le faire avec des listes
    chainees. Je vous ai appris a en faire dans un precedent cours.
    Si vous n’etes pas a l’aise, vous pouvez utiliser des tableaux.
