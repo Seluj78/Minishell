@@ -16,6 +16,7 @@
 
 # include "../libft/includes/libft.h"
 # include "/usr/include/stdint.h"
+# include <sys/wait.h>
 
 char	**str_to_wordtab(char *str);
 char	**str_to_tab_sep(char *str, char separator, int opt);

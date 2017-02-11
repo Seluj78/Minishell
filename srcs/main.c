@@ -96,7 +96,7 @@ int		main(int argc, char **argv, char **environ)
 		char	**cmd;
 		char	**path;
 		char	**tmp_path;
-		//pid_t	father;
+		pid_t	pid;
 
 		(void)environ;
 		t_data data;
@@ -114,8 +114,20 @@ int		main(int argc, char **argv, char **environ)
 				if (ft_strcmp(cmd[0], "exit") == 0)
 					exit(EXIT_SUCCESS);
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+				/*pid = fork();
+				if (pid > 0)
+				{
+					ft_printf("lol j'attends...");
+					wait(0);
+					ft_printf("MY son is done !");
+				}
+				else
+				{
+					ft_printf("I'm the son, doing my stuff");
+					sleep(10);
+					ft_printf("done !");
+				}*/
 				free_chartab(tmp_path, ft_tablen(tmp_path));
-				//father = fork();
 		}
 		free_chartab(path, data.nb_bin);
 		free_chartab(cmd, ft_tablen(cmd));
