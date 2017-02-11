@@ -71,11 +71,31 @@ int		ft_tablen(char **tab)
 	return (i);
 }
 
+char	**ft_tabdup(char **tab)
+{
+	int i;
+	int j;
+	char **dup;
+
+	j = 0;
+	i = 0;
+	while (tab[i] != '\0')
+		i++;
+	dup = malloc(i * sizeof(*tab));
+	while (j < i)
+	{
+		dup[i] = ft_strdup(tab[i]);
+		j++;
+	}
+	return (dup);
+}
+
 int		main(int argc, char **argv, char **environ)
 {
 		char	*line;
 		char	**cmd;
 		char	**path;
+		//char	**tmp_path;
 //		pid_t	father;
 
 		(void)environ;
@@ -87,10 +107,13 @@ int		main(int argc, char **argv, char **environ)
 		path = path_parser(environ, &data);
 		while (get_next_line(0, &line))
 		{
+				//tmp_path = ft_tabdup(path);
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 				cmd = str_to_wordtab(line);
 				path = add_bin_to_tab(path, cmd[0], data.nb_bin);
 				test_path_access(path, data.nb_bin, cmd[0]);
+				//ft_printf("\n%s\n%s\n%s\n", tmp_path[0], tmp_path[1], tmp_path[2]);
+				//free_chartab(tmp_path, ft_tablen(tmp_path));
 				//father = fork();
 		}
 		//free_chartab(path, data.nb_bin);
