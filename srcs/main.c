@@ -81,10 +81,10 @@ char	**ft_tabdup(char **tab)
 	i = 0;
 	while (tab[i] != '\0')
 		i++;
-	dup = malloc(i * sizeof(*tab));
+	dup = malloc(i * sizeof(char *));
 	while (j < i)
 	{
-		dup[i] = ft_strdup(tab[i]);
+		dup[j] = ft_strdup(tab[j]);
 		j++;
 	}
 	return (dup);
@@ -95,8 +95,8 @@ int		main(int argc, char **argv, char **environ)
 		char	*line;
 		char	**cmd;
 		char	**path;
-		//char	**tmp_path;
-//		pid_t	father;
+		char	**tmp_path;
+		//pid_t	father;
 
 		(void)environ;
 		t_data data;
@@ -107,18 +107,19 @@ int		main(int argc, char **argv, char **environ)
 		path = path_parser(environ, &data);
 		while (get_next_line(0, &line))
 		{
-				//tmp_path = ft_tabdup(path);
-				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+				tmp_path = ft_tabdup(path);
 				cmd = str_to_wordtab(line);
-				path = add_bin_to_tab(path, cmd[0], data.nb_bin);
-				test_path_access(path, data.nb_bin, cmd[0]);
-				//ft_printf("\n%s\n%s\n%s\n", tmp_path[0], tmp_path[1], tmp_path[2]);
-				//free_chartab(tmp_path, ft_tablen(tmp_path));
+				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
+				test_path_access(tmp_path, data.nb_bin, cmd[0]);
+				if (ft_strcmp(cmd[0], "exit") == 0)
+					exit(EXIT_SUCCESS);
+				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+				free_chartab(tmp_path, ft_tablen(tmp_path));
 				//father = fork();
 		}
-		//free_chartab(path, data.nb_bin);
-		//free_chartab(cmd, ft_tablen(cmd));
-		//free(line);
+		free_chartab(path, data.nb_bin);
+		free_chartab(cmd, ft_tablen(cmd));
+		free(line);
 		return (0);
 }
 // TODO : Duplicate the path into a tmp var because if i type twice ls it'll endup with /usb/bin/ls/ls
