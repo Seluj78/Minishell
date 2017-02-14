@@ -85,9 +85,8 @@ int		main(int argc, char **argv, char **environ)
 		char	**path;
 		char	**tmp_path;
 		pid_t	pid;
-
-		(void)environ;
 		t_data data;
+
 		data.nb_bin = 0;
 		(void)argc;
 		(void)argv;
