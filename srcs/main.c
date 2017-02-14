@@ -12,18 +12,6 @@
 
 #include "../includes/minishell.h"
 
-/*
-   void	exec_cmd(char **cmd, char **env)
-   {
-   (void)cmd;
-   if (cmd[1] == "ls")
-   {
-   execve("/bin/ls", )
-   }
-   ft_printf("%s", get_env(env, "PATH"));
-   }
- */
-
 void	test_path_access(char **path, int size, char *bin)
 {
 		int i;
@@ -89,11 +77,7 @@ char	**ft_tabdup(char **tab)
 	}
 	return (dup);
 }
-/*
-void	ft_exit(int status)
-{
-}
-*/
+
 int		main(int argc, char **argv, char **environ)
 {
 		char	*line;
@@ -116,7 +100,6 @@ int		main(int argc, char **argv, char **environ)
 				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
 				if (ft_strcmp(cmd[0], "exit") == 0)
 					exit(EXIT_SUCCESS);
-				//TODO : ft_exit to free correctly everything)
 				test_path_access(tmp_path, data.nb_bin, cmd[0]);
 				pid = fork();
 				if (pid > 0)
@@ -135,17 +118,10 @@ int		main(int argc, char **argv, char **environ)
 		free(line);
 		return (0);
 }
+
 // TODO : Check for commands (cd etc...) and not display them as unknown
 // TODO : execute the correct command from path
-
-/*
-   ETAPE 3 LANCER UN PROGRAMME - FORKER
-   Une fois qu’on a recuperer le path, qu’on sait que c’est le bon, on va
-   forker. Pourquoi ? parce qu’apres avoir lancer execve, le programme s’arrete.
-   On veut arreter le programme, pas le minishell. Il faut donc duppliquer le
-   prog. C’est le role de fork. Le cours explique comment il marche.
-   A vous de jouer.
- */
+// TODO : ft_exit to free correctly everything)
 
 /*
    ETAPE 3 LANCER UN PROGRAMME - EXECVE
