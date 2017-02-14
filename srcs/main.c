@@ -89,14 +89,18 @@ char	**ft_tabdup(char **tab)
 	}
 	return (dup);
 }
-
+/*
+void	ft_exit(int status)
+{
+}
+*/
 int		main(int argc, char **argv, char **environ)
 {
 		char	*line;
 		char	**cmd;
 		char	**path;
 		char	**tmp_path;
-		pid_t	pid;
+		//pid_t	pid;
 
 		(void)environ;
 		t_data data;
@@ -110,9 +114,10 @@ int		main(int argc, char **argv, char **environ)
 				tmp_path = ft_tabdup(path);
 				cmd = str_to_wordtab(line);
 				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
-				test_path_access(tmp_path, data.nb_bin, cmd[0]);
 				if (ft_strcmp(cmd[0], "exit") == 0)
 					exit(EXIT_SUCCESS);
+				//ft_exit a faire
+				test_path_access(tmp_path, data.nb_bin, cmd[0]);
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 				/*pid = fork();
 				if (pid > 0)
