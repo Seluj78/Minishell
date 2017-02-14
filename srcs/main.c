@@ -100,7 +100,7 @@ int		main(int argc, char **argv, char **environ)
 		char	**cmd;
 		char	**path;
 		char	**tmp_path;
-		//pid_t	pid;
+		pid_t	pid;
 
 		(void)environ;
 		t_data data;
@@ -116,37 +116,27 @@ int		main(int argc, char **argv, char **environ)
 				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
 				if (ft_strcmp(cmd[0], "exit") == 0)
 					exit(EXIT_SUCCESS);
-				//ft_exit a faire
+				//TODO : ft_exit to free correctly everything)
 				test_path_access(tmp_path, data.nb_bin, cmd[0]);
-				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
-				/*pid = fork();
+				pid = fork();
 				if (pid > 0)
 				{
-					ft_printf("lol j'attends...");
 					wait(0);
-					ft_printf("MY son is done !");
 				}
 				else
 				{
-					ft_printf("I'm the son, doing my stuff");
-					sleep(10);
-					ft_printf("done !");
-				}*/
+					execve("/bin/ls", cmd, NULL);
+				}
 				free_chartab(tmp_path, ft_tablen(tmp_path));
+				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 		}
 		free_chartab(path, data.nb_bin);
 		free_chartab(cmd, ft_tablen(cmd));
 		free(line);
 		return (0);
 }
-// TODO : Duplicate the path into a tmp var because if i type twice ls it'll endup with /usb/bin/ls/ls
-// TODO : add bin at end of path and parse the path in different functions so i can free it correctly
-
-
-
-
-
-
+// TODO : Check for commands (cd etc...) and not display them as unknown
+// TODO : execute the correct command from path
 
 /*
    ETAPE 3 LANCER UN PROGRAMME - FORKER
