@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	test_path_access(char **path, int size, char *bin)
+int		test_path_access(char **path, int size, char *bin)
 {
 		int i;
 		int ok;
@@ -30,10 +30,14 @@ void	test_path_access(char **path, int size, char *bin)
 		if (ok != -1)
 		{
 			//ft_printf("Command found in %d of path[i]\n", ok);
-			//return ...
+			return (ok);
 		}
 		else
+		{
 			ft_printf("Minishell : command not found: %s\n", bin);
+			return (-1);
+			// TODO : Add protection in case of error with the return value in  main
+		}
 }
 
 void	free_chartab(char **tab, int size)
@@ -86,6 +90,7 @@ int		main(int argc, char **argv, char **environ)
 		char	**tmp_path;
 		pid_t	pid;
 		t_data data;
+		int ok;
 
 		data.nb_bin = 0;
 		(void)argc;
@@ -99,7 +104,7 @@ int		main(int argc, char **argv, char **environ)
 				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
 				if (ft_strcmp(cmd[0], "exit") == 0)
 					exit(EXIT_SUCCESS);
-				test_path_access(tmp_path, data.nb_bin, cmd[0]);
+				ok = test_path_access(tmp_path, data.nb_bin, cmd[0]);
 				pid = fork();
 				if (pid > 0)
 				{
@@ -107,7 +112,7 @@ int		main(int argc, char **argv, char **environ)
 				}
 				else
 				{
-					execve("/bin/ls", cmd, NULL);
+					execve(tmp_path[ok], cmd, NULL);
 				}
 				free_chartab(tmp_path, ft_tablen(tmp_path));
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
