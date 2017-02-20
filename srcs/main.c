@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 10:54:29 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 11:00:21 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,20 @@ char	**ft_tabdup(char **tab)
 	return (dup);
 }
 
+
+// TODO : add this as ft_put_arraystring(char **array) in libft
+void	ft_disp_env(char **env)
+{
+	int i;
+
+	i = 0;
+	while (env[i] != '\0')
+	{
+		ft_printf("%s\n", env[i]);
+		i++;
+	}
+}
+
 int		main(int argc, char **argv, char **environ)
 {
 	char	*line;
@@ -133,7 +147,7 @@ int		main(int argc, char **argv, char **environ)
 			if (ft_strcmp(cmd[0], "cd") == 0)
 				ft_printf("Command to be built : cd\n");
 			else if (ft_strcmp(cmd[0], "env") == 0)
-				ft_printf("Command to be built : env\n");
+				ft_disp_env(environ);
 			else if (ft_strcmp(cmd[0], "setenv") == 0)
 				ft_printf("Command to be built : setenv\n");
 			else if (ft_strcmp(cmd[0], "unsetenv") == 0)
@@ -150,7 +164,6 @@ int		main(int argc, char **argv, char **environ)
 	return (0);
 }
 
-// TODO : Check for commands (cd etc...) and not display them as unknown
 // TODO : execute the correct command from path
 // TODO : ft_exit to free correctly everything)
 
