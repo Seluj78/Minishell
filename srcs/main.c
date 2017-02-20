@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 11:00:21 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 11:46:14 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,23 +166,8 @@ int		main(int argc, char **argv, char **environ)
 
 // TODO : execute the correct command from path
 // TODO : ft_exit to free correctly everything)
-
-/*
-   et voila ! On a lance un programme a partir de notre minishell.
-   Maintenant, on a quelques builtins a realiser.
-   env, setenv et unsetenv. Le mieux serait de le faire avec des listes
-   chainees. Je vous ai appris a en faire dans un precedent cours.
-   Si vous n’etes pas a l’aise, vous pouvez utiliser des tableaux.
-   */
-
-/*
-   ETAPE 4 ENV
-   -> Si vous prenez la solution liste chainee (trop classe wahou), faites une
-   fonction qui transforme le char **env en t_list *env. Cette fonction
-   ressemblera a l’exo de piscine "my_params_in_list.c" (Jour 11).
-   Afficher cette liste.
-   -> Si vous choisissez de garder un tableau, afficher simplement ce tableau.
-   */
+// TODO : Implementer cd - (go google) et du coup add oldpwd dans path
+// TODO : Utiliser signal pour catch les signaux de segfault etc...
 
 /*
    ETAPE 5 SETENV
