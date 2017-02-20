@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/02/04 13:14:50 by jlasne           ###   ########.fr        #
+#    Updated: 2017/02/20 10:13:24 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBFT =	libft/libft.a
 
 CC = clang
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address#
+FLAGS = -g -Wall -Wextra -Werror #-fsanitize=address#
 
 all: $(NAME)
 
