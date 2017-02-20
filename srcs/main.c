@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 10:15:30 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 10:54:29 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,48 @@
 
 int		test_path_access(char **path, int size, char *bin)
 {
-		int i;
-		int ok;
+	int i;
+	int ok;
 
-		ok = -1;
-		i = 0;
-		while (i < size)
+	ok = -1;
+	i = 0;
+	while (i < size)
+	{
+		if (access(path[i], F_OK) == 0)
 		{
-			if (access(path[i], F_OK) == 0)
-			{
-				ok = i;
-			}
-			i++;
-		}
-		if (ok != -1)
-		{
-			//ft_printf("Command found in %d of path[i]\n", ok);
-			return (ok);
+			ok = i;
 		}
 		else
 		{
-			ft_printf("Minishell : command not found: %s\n", bin);
-			return (-1);
-			// TODO : Add protection in case of error with the return value in  main
+			if (ft_strcmp(bin, "cd") == 0)
+				ok = -2;
+			if (ft_strcmp(bin, "env") == 0)
+				ok = -2;
+			if (ft_strcmp(bin, "setenv") == 0)
+				ok = -2;
+			if (ft_strcmp(bin, "unsetenv") == 0)
+				ok = -2;
+			//TODO : -2 = builtin command
+
 		}
+		i++;
+	}
+	if (ok != -1)
+	{
+		//ft_printf("Command found in %d of path[i]\n", ok);
+		return (ok);
+	}
+	else
+	{
+		if (ok == -2)
+		{
+			//Builtin
+		}
+		else
+			ft_printf("Minishell : command not found: %s\n", bin);
+		return (-1);
+		// TODO : Add protection in case of error with the return value in  main
+	}
 }
 
 void	free_chartab(char **tab, int size)
@@ -84,43 +102,52 @@ char	**ft_tabdup(char **tab)
 
 int		main(int argc, char **argv, char **environ)
 {
-		char	*line;
-		char	**cmd;
-		char	**path;
-		char	**tmp_path;
-		pid_t	pid;
-		t_data data;
-		int ok;
+	char	*line;
+	char	**cmd;
+	char	**path;
+	char	**tmp_path;
+	pid_t	pid;
+	t_data data;
+	int ok;
 
-		data.nb_bin = 0;
-		(void)argc;
-		(void)argv;
-		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
-		path = path_parser(environ, &data);
-		while (get_next_line(0, &line))
+	data.nb_bin = 0;
+	(void)argc;
+	(void)argv;
+	ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+	path = path_parser(environ, &data);
+	while (get_next_line(0, &line))
+	{
+		tmp_path = ft_tabdup(path);
+		cmd = str_to_wordtab(line);
+		tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
+		if (ft_strcmp(cmd[0], "exit") == 0)
+			exit(EXIT_SUCCESS);
+		ok = test_path_access(tmp_path, data.nb_bin, cmd[0]);
+		pid = fork();
+		if (pid > 0)
 		{
-				tmp_path = ft_tabdup(path);
-				cmd = str_to_wordtab(line);
-				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
-				if (ft_strcmp(cmd[0], "exit") == 0)
-					exit(EXIT_SUCCESS);
-				ok = test_path_access(tmp_path, data.nb_bin, cmd[0]);
-				pid = fork();
-				if (pid > 0)
-				{
-					wait(0);
-				}
-				else
-				{
-					execve(tmp_path[ok], cmd, NULL);
-				}
-				//TODO : Rework this free, makes program crash free_chartab(tmp_path, ft_tablen(tmp_path));
-				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+			wait(0);
 		}
-		free_chartab(path, data.nb_bin);
-		free_chartab(cmd, ft_tablen(cmd));
-		free(line);
-		return (0);
+		else
+		{
+			if (ft_strcmp(cmd[0], "cd") == 0)
+				ft_printf("Command to be built : cd\n");
+			else if (ft_strcmp(cmd[0], "env") == 0)
+				ft_printf("Command to be built : env\n");
+			else if (ft_strcmp(cmd[0], "setenv") == 0)
+				ft_printf("Command to be built : setenv\n");
+			else if (ft_strcmp(cmd[0], "unsetenv") == 0)
+				ft_printf("Command to be built : unsetenv\n");
+			else
+				execve(tmp_path[ok], cmd, NULL);
+		}
+		//TODO : Rework this free, makes program crash : free_chartab(tmp_path, ft_tablen(tmp_path));
+		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+	}
+	free_chartab(path, data.nb_bin);
+	free_chartab(cmd, ft_tablen(cmd));
+	free(line);
+	return (0);
 }
 
 // TODO : Check for commands (cd etc...) and not display them as unknown
@@ -128,23 +155,12 @@ int		main(int argc, char **argv, char **environ)
 // TODO : ft_exit to free correctly everything)
 
 /*
-   ETAPE 3 LANCER UN PROGRAMME - EXECVE
-   execve doit etre execute dans le fils. S’il reussit, alors il ne fera pas ce
-   qu’il y a apres puisqu’il quitte. Sinon, il le fera.
-   il prend en parametre le path calcule precedemment et un tableau a deux
-   dimemsions vers chaque arguments exemple :
-   {"ls", "-l", "-a", ".", NULL}
-   ca tombe bien, c’est exectement ce qu’on a fait avec le str_to_wordtab.
-   et l’environnement sous forme d’un tableau.
- */
-
-/*
    et voila ! On a lance un programme a partir de notre minishell.
    Maintenant, on a quelques builtins a realiser.
    env, setenv et unsetenv. Le mieux serait de le faire avec des listes
    chainees. Je vous ai appris a en faire dans un precedent cours.
    Si vous n’etes pas a l’aise, vous pouvez utiliser des tableaux.
- */
+   */
 
 /*
    ETAPE 4 ENV
@@ -153,7 +169,7 @@ int		main(int argc, char **argv, char **environ)
    ressemblera a l’exo de piscine "my_params_in_list.c" (Jour 11).
    Afficher cette liste.
    -> Si vous choisissez de garder un tableau, afficher simplement ce tableau.
- */
+   */
 
 /*
    ETAPE 5 SETENV
@@ -164,7 +180,7 @@ tableau : ajouter un element a la fin du tableau. Pour ca, il va falloir
 faire un realloc, c’est a dire free(env) (sauf si c’est le tableau de depart)
 malloc(la taille du tableau d’avant + 1). pareil, si l’element existe,
 il faut le modifier.
- */
+*/
 
 /*
    ETAPE 6 UNSETENV
@@ -172,9 +188,9 @@ il faut le modifier.
    pop_elem_from_list (google :))
 tableau : parcourir le tableau, trouver (ou pas) l’element, realloc le
 tableau en enlevant l’elem.
- */
+*/
 
 /*
    ETAPE 7 CD
    la, je me contenterait de vous dire "chdir". Et man. Et google.
- */
+   */
