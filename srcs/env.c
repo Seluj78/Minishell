@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:30:20 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:47:19 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 14:51:36 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,5 @@ int		command_unsetenv(char **argv, char ***env)
 		ft_printf("unsetenv: Too few arguments.\n");
 	return (1);
 }
+
+// TODO : SEND A POINTER OF A COPY OF ENV TO MODIFY

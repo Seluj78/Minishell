@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:29:02 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 14:52:05 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**ft_tabdup(char **tab)
 	return (dup);
 }
 
-
+// TODO : Display the copy of env, the one that we will modifiy with setenv etc..
 // TODO : add this as ft_put_arraystring(char **array) in libft
 void	ft_disp_env(char **env)
 {
