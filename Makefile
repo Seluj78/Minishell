@@ -6,16 +6,21 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/02/20 10:13:24 by jlasne           ###   ########.fr        #
+#    Updated: 2017/02/20 14:46:41 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	main.c\
+		env.c\
 		cmd_parser.c\
 		path_parser.c\
-		break_str_to_tab_sep.c
+		break_str_to_tab_sep.c\
+		ft_add_to_array.c\
+		ft_free_array.c\
+		ft_arraylen.c\
+		ft_remove_from_array.c
 
 OBJ = $(SRC:.c=.o)
 

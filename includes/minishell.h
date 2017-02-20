@@ -6,7 +6,7 @@
 /*   By: blucas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 12:02:48 by blucas            #+#    #+#             */
-/*   Updated: 2017/02/04 13:15:21 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 14:43:41 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ typedef struct  s_data
 
 char	**path_parser(char **envrion, t_data *data);
 char	**add_bin_to_tab(char **tab, char *bin, int nb_bin);
+char	**ft_add_to_array(char *str, char **arr);
+int		ft_arraylen(char **arr);
+int		ft_free_array(char **);
+char	**ft_remove_from_array(int rem, char **arr);
 
 #endif

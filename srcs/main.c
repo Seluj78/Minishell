@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 11:46:14 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/02/20 14:29:02 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,21 +171,16 @@ int		main(int argc, char **argv, char **environ)
 
 /*
    ETAPE 5 SETENV
-   liste chainee : ajouter un element a la liste. A la fin de la liste. Pas
-   tres difficile :) mais attention, vous devez verifier si l’element n’
-   existe pas deja et si c’est le cas modifier cet element.
-tableau : ajouter un element a la fin du tableau. Pour ca, il va falloir
-faire un realloc, c’est a dire free(env) (sauf si c’est le tableau de depart)
-malloc(la taille du tableau d’avant + 1). pareil, si l’element existe,
-il faut le modifier.
+   ajouter un element a la fin du tableau. Pour ca, il va falloir
+   faire un realloc, c’est a dire free(env) (sauf si c’est le tableau de depart)
+   malloc(la taille du tableau d’avant + 1). pareil, si l’element existe,
+   il faut le modifier.
 */
 
 /*
    ETAPE 6 UNSETENV
-   liste chainee : parcourir sa liste, trouver (ou pas) l’element, l’enlever.
-   pop_elem_from_list (google :))
-tableau : parcourir le tableau, trouver (ou pas) l’element, realloc le
-tableau en enlevant l’elem.
+   parcourir le tableau, trouver (ou pas) l’element, realloc le
+   tableau en enlevant l’elem.
 */
 
 /*
