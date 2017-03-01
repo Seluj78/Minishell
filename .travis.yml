@@ -1,4 +1,4 @@
 script: make re
-laguage: c
+language: c
 os: osx
 compiler: clang
