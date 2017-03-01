@@ -1,3 +1,4 @@
 install: make re
 laguage: c
 os: osx
+compiler: clang
