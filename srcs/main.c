@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:52:05 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/01 12:39:03 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int		main(int argc, char **argv, char **environ)
 	char	**cmd;
 	char	**path;
 	char	**tmp_path;
+	char	**env;
 	pid_t	pid;
 	t_data data;
 	int ok;
@@ -128,7 +129,8 @@ int		main(int argc, char **argv, char **environ)
 	(void)argc;
 	(void)argv;
 	ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
-	path = path_parser(environ, &data);
+	env = ft_tabdup(environ);
+	path = path_parser(env, &data);
 	while (get_next_line(0, &line))
 	{
 		tmp_path = ft_tabdup(path);
@@ -147,7 +149,7 @@ int		main(int argc, char **argv, char **environ)
 			if (ft_strcmp(cmd[0], "cd") == 0)
 				ft_printf("Command to be built : cd\n");
 			else if (ft_strcmp(cmd[0], "env") == 0)
-				ft_disp_env(environ);
+				ft_disp_env(env);
 			else if (ft_strcmp(cmd[0], "setenv") == 0)
 				ft_printf("Command to be built : setenv\n");
 			else if (ft_strcmp(cmd[0], "unsetenv") == 0)
@@ -160,11 +162,11 @@ int		main(int argc, char **argv, char **environ)
 	}
 	free_chartab(path, data.nb_bin);
 	free_chartab(cmd, ft_tablen(cmd));
+	free_chartab(env, ft_tablen(env));
 	free(line);
 	return (0);
 }
 
-// TODO : execute the correct command from path
 // TODO : ft_exit to free correctly everything)
 // TODO : Implementer cd - (go google) et du coup add oldpwd dans path
 // TODO : Utiliser signal pour catch les signaux de segfault etc...
