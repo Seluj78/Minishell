@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/02 12:34:02 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/02 12:58:47 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,10 +160,6 @@ int		main(int argc, char **argv, char **environ)
 		//TODO : Rework this free, makes program crash : free_chartab(tmp_path, ft_tablen(tmp_path));
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 	}
-	free_chartab(path, data.nb_bin);
-	free_chartab(cmd, ft_tablen(cmd));
-	free_chartab(env, ft_tablen(env));
-	free(line);
 	return (0);
 }
 
