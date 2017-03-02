@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/02/20 14:46:41 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/02 11:56:27 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,5 +56,8 @@ fclean: clean
 			make fclean -C ./libft/
 
 re: fclean all
+
+test: re
+	cat tests/test_ls.txt | ./minishell
 
 .PHONY : all re clean fclean
