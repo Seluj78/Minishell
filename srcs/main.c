@@ -34,7 +34,16 @@ int		test_path_access(char **path, int size, char *bin)
 		}
 		else
 		{
-			ft_printf("Minishell : command not found: %s\n", bin);
+			if (ft_strcmp(bin, "cd") == 0)
+			{
+				ft_printf("\n%s\n", bin);
+			}
+			else if (ft_strcmp(bin, "") == 0)
+			{
+				ft_printf("\n%s\n", bin);
+			}
+			else
+				ft_printf("Minishell : command not found: %s\n", bin);
 			return (-1);
 			// TODO : Add protection in case of error with the return value in  main
 		}
@@ -112,7 +121,7 @@ int		main(int argc, char **argv, char **environ)
 				}
 				else
 				{
-					execve(tmp_path[ok], cmd, NULL);
+					execve(tmp_path[ok], cmd, environ);
 				}
 				free_chartab(tmp_path, ft_tablen(tmp_path));
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
