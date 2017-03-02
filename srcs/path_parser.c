@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 12:57:41 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/08 16:09:48 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/02 13:00:26 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ char	**path_parser(char **env, t_data *data)
 						tab = str_to_tab_sep(path, ':', 0);
 		}
 		data->nb_bin = count_path_size(path, ':');
-		free(path);
+		//free(path);
 		//return (add_bin_to_tab(tab, bin, data->nb_bin));
 		return (tab);
 }

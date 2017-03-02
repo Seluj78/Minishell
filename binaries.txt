@@ -1,1 +1,0 @@
-ls /Users/jlasne/.brew/bin; ls /usr/bin; ls /bin; ls /usr/sbin; ls /sbin; ls /usr/local/bin; ls /usr/local/munki
