@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/01 12:39:03 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/02 12:34:02 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,11 @@ int		main(int argc, char **argv, char **environ)
 	path = path_parser(env, &data);
 	while (get_next_line(0, &line))
 	{
-		tmp_path = ft_tabdup(path);
 		cmd = str_to_wordtab(line);
-		tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
 		if (ft_strcmp(cmd[0], "exit") == 0)
 			exit(EXIT_SUCCESS);
+		tmp_path = ft_tabdup(path);
+		tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
 		ok = test_path_access(tmp_path, data.nb_bin, cmd[0]);
 		pid = fork();
 		if (pid > 0)
@@ -167,6 +167,7 @@ int		main(int argc, char **argv, char **environ)
 	return (0);
 }
 
+// fix the exit command, won't exit correctly (asks numerous times to exit)
 // TODO : ft_exit to free correctly everything)
 // TODO : Implementer cd - (go google) et du coup add oldpwd dans path
 // TODO : Utiliser signal pour catch les signaux de segfault etc...
@@ -177,13 +178,13 @@ int		main(int argc, char **argv, char **environ)
    faire un realloc, c’est a dire free(env) (sauf si c’est le tableau de depart)
    malloc(la taille du tableau d’avant + 1). pareil, si l’element existe,
    il faut le modifier.
-*/
+   */
 
 /*
    ETAPE 6 UNSETENV
    parcourir le tableau, trouver (ou pas) l’element, realloc le
    tableau en enlevant l’elem.
-*/
+   */
 
 /*
    ETAPE 7 CD
