@@ -146,42 +146,23 @@ int		main(int argc, char **argv, char **environ)
 				}
 				else
 				{
-						<<<<<<< HEAD
-								tmp_path = ft_tabdup(path);
-						cmd = str_to_wordtab(line);
-						tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
-						if (ft_strcmp(cmd[0], "exit") == 0)
-								exit(EXIT_SUCCESS);
-						ok = test_path_access(tmp_path, data.nb_bin, cmd[0]);
-						pid = fork();
-						if (pid > 0)
-						{
-								wait(0);
-						}
+						if (ft_strcmp(cmd[0], "cd") == 0)
+								ft_printf("Command to be built : cd\n");
+						else if (ft_strcmp(cmd[0], "env") == 0)
+								ft_disp_env(env); //look forum, c'est pas comme ca que env marche
+						else if (ft_strcmp(cmd[0], "setenv") == 0)
+								ft_printf("Command to be built : setenv\n");
+						else if (ft_strcmp(cmd[0], "unsetenv") == 0)
+								ft_printf("Command to be built : unsetenv\n");
 						else
-						{
-								execve(tmp_path[ok], cmd, environ);
-						}
-						free_chartab(tmp_path, ft_tablen(tmp_path));
-						ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
-						=======
-								if (ft_strcmp(cmd[0], "cd") == 0)
-										ft_printf("Command to be built : cd\n");
-								else if (ft_strcmp(cmd[0], "env") == 0)
-										ft_disp_env(env); //look forum, c'est pas comme ca que env marche
-								else if (ft_strcmp(cmd[0], "setenv") == 0)
-										ft_printf("Command to be built : setenv\n");
-								else if (ft_strcmp(cmd[0], "unsetenv") == 0)
-										ft_printf("Command to be built : unsetenv\n");
-								else
-										execve(tmp_path[ok], cmd, NULL);
-						>>>>>>> cfdc8ca72b72d255b67bba6f12b7da8821a31ad0
+								execve(tmp_path[ok], cmd, NULL);
 				}
 				//TODO : Rework this free, makes program crash : free_chartab(tmp_path, ft_tablen(tmp_path));
 				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 		}
 		return (0);
 }
+
 // TODO : pressing return without typing anything = segfault
 // TODO : fix the exit command, won't exit correctly (asks numerous times to exit)
 // TODO : ft_exit to free correctly everything)
