@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/02 12:58:47 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/02 14:02:56 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int		main(int argc, char **argv, char **environ)
 			if (ft_strcmp(cmd[0], "cd") == 0)
 				ft_printf("Command to be built : cd\n");
 			else if (ft_strcmp(cmd[0], "env") == 0)
-				ft_disp_env(env);
+				ft_disp_env(env); //look forum, c'est pas comme ca que env marche
 			else if (ft_strcmp(cmd[0], "setenv") == 0)
 				ft_printf("Command to be built : setenv\n");
 			else if (ft_strcmp(cmd[0], "unsetenv") == 0)
@@ -162,8 +162,8 @@ int		main(int argc, char **argv, char **environ)
 	}
 	return (0);
 }
-
-// fix the exit command, won't exit correctly (asks numerous times to exit)
+// TODO : pressing return without typing anything = segfault
+// TODO : fix the exit command, won't exit correctly (asks numerous times to exit)
 // TODO : ft_exit to free correctly everything)
 // TODO : Implementer cd - (go google) et du coup add oldpwd dans path
 // TODO : Utiliser signal pour catch les signaux de segfault etc...
