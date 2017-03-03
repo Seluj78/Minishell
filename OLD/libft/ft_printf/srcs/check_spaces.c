@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   check_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: estephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 10:48:03 by jlasne           ###   ########.fr       */
+/*   Created: 2016/12/12 11:06:57 by estephan          #+#    #+#             */
+/*   Updated: 2016/12/12 13:36:01 by estephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../includes/includes.h"
 
-# include "../libft/includes/libft.h"
+void	check_spaces(t_data *data)
+{
+	int		i;
 
-#endif
+	i = 0;
+	data->check_spaces = FALSE;
+	while (data->conv[i] != '\0' && data->conv[i - 1] != ' ')
+	{
+		if (data->conv[i] == ' ')
+			data->check_spaces = TRUE;
+		i++;
+	}
+}

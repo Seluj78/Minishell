@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 10:48:03 by jlasne           ###   ########.fr       */
+/*   Created: 2016/11/03 13:50:26 by jlasne            #+#    #+#             */
+/*   Updated: 2016/11/03 13:50:46 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libft/includes/libft.h"
+char	*ft_strncat(char *s1, const char *s2, size_t n)
+{
+	int		size;
+	int		cpt;
 
-#endif
+	cpt = 0;
+	size = ft_strlen(s1);
+	while (s2[cpt] && n--)
+		s1[size++] = s2[cpt++];
+	s1[size] = '\0';
+	return (s1);
+}

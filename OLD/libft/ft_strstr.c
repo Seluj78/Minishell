@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 10:48:03 by jlasne           ###   ########.fr       */
+/*   Created: 2016/11/03 14:04:35 by jlasne            #+#    #+#             */
+/*   Updated: 2016/11/03 14:12:07 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libft/includes/libft.h"
+char	*ft_strstr(const char *s1, char *s2)
+{
+	int		cpt;
+	int		cpt2;
+	int		size;
 
-#endif
+	cpt = -1;
+	cpt2 = 0;
+	size = ft_strlen(s2);
+	if (!size || !s1)
+		return ((char *)s1);
+	size--;
+	while (s1[++cpt])
+	{
+		while (s2[cpt2] == s1[cpt + cpt2])
+		{
+			if (cpt2 == size)
+				return ((char *)&s1[cpt]);
+			cpt2++;
+		}
+		cpt2 = 0;
+	}
+	return (NULL);
+}

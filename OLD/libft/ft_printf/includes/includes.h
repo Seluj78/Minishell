@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 10:48:03 by jlasne           ###   ########.fr       */
+/*   Created: 2016/11/04 11:21:38 by jlasne            #+#    #+#             */
+/*   Updated: 2017/01/06 10:15:58 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
-# include "../libft/includes/libft.h"
+# include "../../includes/libft.h"
+# include "proto.h"
+# include "struct.h"
+# include "colors.h"
+# include <stdarg.h>
+# include <stdio.h>
+# include <wchar.h>
+# include <inttypes.h>
 
 #endif

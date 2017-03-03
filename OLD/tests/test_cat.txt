@@ -1,0 +1,3 @@
+cat Makefile
+cat srcs/main.c
+cat -e Makefile

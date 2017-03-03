@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_ll.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 10:48:03 by jlasne           ###   ########.fr       */
+/*   Created: 2016/11/28 11:09:15 by jlasne            #+#    #+#             */
+/*   Updated: 2016/12/19 18:01:12 by estephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+#include <unistd.h>
 
-# include "../libft/includes/libft.h"
-
-#endif
+void	ft_putnbr_ll(long long n)
+{
+	if (n == -9223372036854775807 - 1)
+	{
+		ft_putstr("-9223372036854775808");
+		return ;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_ll(n / 10);
+		ft_putnbr_ll(n % 10);
+	}
+	else
+		ft_putchar(n + 48);
+}

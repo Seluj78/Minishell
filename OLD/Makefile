@@ -6,21 +6,21 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/03 10:54:28 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/02 13:38:35 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	main.c\
-		#env.c\
+		env.c\
 		cmd_parser.c\
 		path_parser.c\
 		break_str_to_tab_sep.c\
 		ft_add_to_array.c\
 		ft_free_array.c\
 		ft_arraylen.c\
-		ft_remove_from_array.c#
+		ft_remove_from_array.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -57,13 +57,12 @@ fclean: clean
 
 re: fclean all
 
-test:
-	make re && ./minishell
-	#cat tests/test_ls.txt | ./minishell
-	#cat tests/test_exit.txt | ./minishell
-	#cat tests/test_cat.txt | ./minishell
-	#cat tests/test_env.txt | ./minishell
-	#cat tests/test_cd.txt | ./minishell
-	#cat tests/test_errors.txt | ./minishell
+test: re
+	cat tests/test_ls.txt | ./minishell
+	cat tests/test_exit.txt | ./minishell
+	cat tests/test_cat.txt | ./minishell
+	cat tests/test_env.txt | ./minishell
+	cat tests/test_cd.txt | ./minishell
+	cat tests/test_errors.txt | ./minishell
 
 .PHONY : all re clean fclean
