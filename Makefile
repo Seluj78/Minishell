@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/03 10:54:28 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/03 11:03:55 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,12 +58,12 @@ fclean: clean
 re: fclean all
 
 test:
-	make re && ./minishell
-	#cat tests/test_ls.txt | ./minishell
-	#cat tests/test_exit.txt | ./minishell
-	#cat tests/test_cat.txt | ./minishell
-	#cat tests/test_env.txt | ./minishell
-	#cat tests/test_cd.txt | ./minishell
-	#cat tests/test_errors.txt | ./minishell
+	make && ./minishell
+	@#cat tests/test_ls.txt | ./minishell#
+	@#cat tests/test_exit.txt | ./minishell#
+	@#cat tests/test_cat.txt | ./minishell#
+	@#cat tests/test_env.txt | ./minishell#
+	@#cat tests/test_cd.txt | ./minishell#
+	@#cat tests/test_errors.txt | ./minishell#
 
 .PHONY : all re clean fclean
