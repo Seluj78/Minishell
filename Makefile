@@ -6,16 +6,16 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/03 13:56:07 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/03 15:39:01 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	main.c\
+		path_parser.c
 		#env.c\
 		cmd_parser.c\
-		path_parser.c\
 		break_str_to_tab_sep.c\
 		ft_add_to_array.c\
 		ft_free_array.c\
