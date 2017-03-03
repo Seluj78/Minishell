@@ -1,6 +1,0 @@
-ls
-ls -l
-ls -R
-ls -a
-ls -Rla
-ls -l ~/
