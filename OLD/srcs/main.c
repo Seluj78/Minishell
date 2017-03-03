@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/02 14:02:56 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/03 11:38:48 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int		main(int argc, char **argv, char **environ)
 	path = path_parser(env, &data);
 	while (get_next_line(0, &line))
 	{
-		cmd = str_to_wordtab(line);
+		cmd = str_to_tab_sep(line, ' ', 0);
 		if (ft_strcmp(cmd[0], "exit") == 0)
 			exit(EXIT_SUCCESS);
 		tmp_path = ft_tabdup(path);

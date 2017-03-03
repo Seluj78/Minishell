@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:37:12 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:37:42 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 11:44:35 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/03 11:44:54 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
 int		ft_arraylen(char **arr)
 {
@@ -23,5 +23,3 @@ int		ft_arraylen(char **arr)
 		i = i + 1;
 	return (i);
 }
-
-//TODO : ADD TO LIB

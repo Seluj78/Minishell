@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_remove_from_array.c                             :+:      :+:    :+:   */
+/*   ft_remfrom_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:33:32 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:44:01 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 11:50:13 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/03 11:53:10 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
 char		**copy_array_without(int rem, char **new_arr, char **arr, int len)
 {
@@ -36,10 +36,10 @@ char		**copy_array_without(int rem, char **new_arr, char **arr, int len)
 	return (new_arr);
 }
 
-char		**ft_remove_from_array(int rem, char **arr)
+char		**ft_remfrom_array(int rem, char **arr)
 {
 	int		len;
-	char		**new_arr;
+	char	**new_arr;
 
 	new_arr = NULL;
 	if (arr != NULL)
@@ -51,6 +51,3 @@ char		**ft_remove_from_array(int rem, char **arr)
 	}
 	return (new_arr);
 }
-
-
-// TODO : Add to libft

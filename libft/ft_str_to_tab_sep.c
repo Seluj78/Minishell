@@ -1,59 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_to_tab_sep.c                                   :+:      :+:    :+:   */
+/*   ft_str_to_wordtab.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/04 13:11:12 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/04 13:19:53 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 11:17:49 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/03 12:31:22 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
-static char	*ft_strepur(char *str, int a)
+static char		*ft_strepur2(char *str, int a, int separator)
 {
-	int	b;
+	int		b;
 	char	*cpy;
-	int	ok;
+	int		ok;
 
 	b = 0;
 	ok = 0;
 	cpy = malloc(ft_strlen(str));
 	while (str[a] != '\0')
 	{
-		if (str[a] != ' ' && str[a] != '\t')
-		{
-			cpy[b++] = str[a];
-			ok = 1;
-		}
-		else if (ok == 1)
-		{
-			cpy[b++] = ' ';
-			ok = 0;
-		}
-		++a;
-	}
-	cpy[b] = '\0';
-	if (cpy[ft_strlen(cpy) -1] == ' ' || cpy[ft_strlen(cpy) -1] == '\t')
-		cpy[ft_strlen(cpy) -1] = '\0';
-	return (cpy);
-}
-
-static char	*ft_strepur2(char *str, int a, int separator)
-{
-	int	b;
-	char	*cpy;
-	int	ok;
-
-	b = 0;
-	ok = 0;
-	cpy = malloc(ft_strlen(str));
-	while (str[a] != '\0')
-	{
-		if (ok == 0 && (str[a] == ' ' || str[a] == '\t'))
-			++a;
+		(ok == 0 && (str[a] == ' ' || str[a] == '\t')) ? ++a : 0;
 		if (str[a] != separator)
 		{
 			cpy[b++] = str[a];
@@ -61,27 +31,25 @@ static char	*ft_strepur2(char *str, int a, int separator)
 		}
 		else if (ok == 1)
 		{
-
 			cpy[b++] = separator;
 			ok = 0;
 		}
 		++a;
 	}
 	cpy[b] = '\0';
-	if (cpy[ft_strlen(cpy) -1] == separator)
-		cpy[ft_strlen(cpy) -1] = '\0';
+	(cpy[ft_strlen(cpy) - 1] == separator) ? cpy[ft_strlen(cpy) - 1] = '\0' : 0;
 	return (cpy);
 }
 
-static char	*ft_do_epur(char *str, int separator, int opt)
+static char		*ft_do_epur(char *str, int separator, int opt)
 {
-	  str = ft_strepur(str, 0);
-	    if (opt == 1)
-			    str = ft_strepur2(str, 0, separator);
-		  return (str);
+	str = ft_strepur(str, 0);
+	if (opt == 1)
+		str = ft_strepur2(str, 0, separator);
+	return (str);
 }
 
-static int	ft_wordsnbr(char *str, char separator)
+static int		ft_wordsnbr(char *str, char separator)
 {
 	int	words;
 	int	no;
@@ -107,7 +75,7 @@ static int	ft_wordsnbr(char *str, char separator)
 	return (words);
 }
 
-static char 	**ft_alloc_mem(char *str, char **tab, char separator)
+static char		**ft_alloc_mem(char *str, char **tab, char separator)
 {
 	int	x;
 	int	w;
@@ -126,13 +94,13 @@ static char 	**ft_alloc_mem(char *str, char **tab, char separator)
 	return (tab);
 }
 
-char	**str_to_tab_sep(char *str, char separator, int opt)
+char			**ft_str_to_tab_sep(char *str, char separator, int opt)
 {
 	char	**tab;
 	char	*temp;
-	int	i;
-	int	k;
-	int	j;
+	int		i;
+	int		k;
+	int		j;
 
 	j = 0;
 	i = 0;
@@ -142,13 +110,12 @@ char	**str_to_tab_sep(char *str, char separator, int opt)
 	while (temp[i] != '\0')
 	{
 		k = 0;
-		if (temp[i] == separator)
-			++i;
+		(temp[i] == separator) ? ++i : 0;
 		while (temp[i] != separator && temp[i] != '\0')
 		{
 			tab[j][k] = temp[i];
-			k = k + 1;
-			i = i + 1;
+			k++;
+			i++;
 		}
 		tab[j][k] = '\0';
 		++j;

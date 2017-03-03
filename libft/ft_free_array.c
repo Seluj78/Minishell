@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:38:28 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:39:29 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 11:27:17 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/03 11:49:08 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
 int		ft_free_array(char **arr)
 {
@@ -22,11 +22,9 @@ int		ft_free_array(char **arr)
 	while (arr[i] != NULL)
 	{
 		free(arr[i]);
-		i = i + 1;
+		i++;
 	}
 	if (arr != NULL)
 		free(arr);
 	return (1);
 }
-
-// TODO : ADD TO LIBFT
