@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 15:50:12 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/03 17:13:03 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(int argc, char **argv, char **environ)
 
 	envcpy = ft_tabdup(environ);
 	path = path_parser(envcpy, &data);
-	ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+	ft_printf("{:blue}[{:lred}Minishell{:blue}] {:lgreen}➜{:reset} ");
 	while (get_next_line(0, &line))
 	{
 		if (ft_strcmp(line, "\n") > 0)
