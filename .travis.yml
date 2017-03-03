@@ -2,3 +2,6 @@ script: make test
 language: c
 os: osx
 compiler: clang
+addons:
+    code_climate:
+        repo_token: 9a2de9c315bfbfbbed34a079743ef74ee2ec0984a538e30c33e2226801431bb8
