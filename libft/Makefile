@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 12:34:13 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/03 12:19:22 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/03 13:28:40 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,7 +140,8 @@ SRC = ft_bzero.c\
 	  ft_add_to_array.c\
 	  ft_arraylen.c\
 	  ft_remfrom_array.c\
-	  ft_strjoin_sep.c
+	  ft_strjoin_sep.c\
+	  ft_print_array.c
 
 OBJ = $(SRC:.c=.o)
 
