@@ -35,5 +35,7 @@ env
 setenv
 unsetenv
 echo
+dispenv
+help
 
 exit

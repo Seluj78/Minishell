@@ -6,13 +6,13 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 13:50:15 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/03 14:12:33 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	what_cmd(char **input)
+void	what_cmd(char **input, char **envcpy)
 {
 	if (ft_strcmp(input[0], "cd") == 0)
 		ft_printf("Command to be built : cd\n");
@@ -24,6 +24,10 @@ void	what_cmd(char **input)
 		ft_printf("Command to be built : unsetenv\n");
 	else if (ft_strcmp(input[0], "echo") == 0)
 		ft_printf("Command to be built : echo\n");
+	else if (ft_strcmp(input[0], "dispenv") == 0)
+		ft_print_array(envcpy);
+	else if (ft_strcmp(input[0], "help") == 0)
+		ft_printf("Help section will soonly be displayed here\n");
 	else
 		ft_printf("Minishell: Command not found: %s\n", input[0]);
 }
@@ -35,7 +39,9 @@ int		main(int argc, char **argv, char **environ)
 	(void)environ;
 	char *line;
 	char **input;
+	char **envcpy;
 
+	envcpy = ft_tabdup(environ);
 	ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 	while (get_next_line(0, &line))
 	{
@@ -44,10 +50,11 @@ int		main(int argc, char **argv, char **environ)
 			input = ft_str_to_tab_sep(line, ' ', 0);
 			if (ft_strcmp(line, "exit") == 0)
 				exit(EXIT_SUCCESS);
-			what_cmd(input);
+			what_cmd(input, envcpy);
 			ft_free_array(input);
 		}
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 	}
+	ft_free_array(envcpy);
 	return (0);
 }
