@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 12:57:41 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 15:49:57 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/03 15:52:47 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ char	**path_parser(char **env, t_data *data)
 	char	*path = NULL;
 
 	tab = NULL;
-	if (env == NULL)
+	if (env[0] == NULL)
 		tab = do_absolute();
 	else
 	{
