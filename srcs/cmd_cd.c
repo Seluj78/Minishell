@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 14:23:09 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 14:32:05 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:47:23 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,23 @@ char	*getcharenv(char **env, char *name)
 	return (*env);
 }
 
+void	oldpwd(char **env)
+{
+	chdir(getcharenv(env, "OLDPWD"));
+}
+
 void	cmd_cd(char **input, char ***env)
 {
 	if (input[1] == NULL)
+	{
+		*env = ft_setenv("OLDPWD", getcharenv(*env, "PWD"), *env);
 		chdir(getcharenv(*env, "HOME"));
-	chdir(input[1]);
+	}
+	else if (ft_strcmp(input[1], "-") == 0)
+		oldpwd(*env);
+	else
+	{
+		*env = ft_setenv("OLDPWD", getcharenv(*env, "PWD"), *env);
+		chdir(input[1]);
+	}
 }
-
-//TODO : cd - & OLDPWD

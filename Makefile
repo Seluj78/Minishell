@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/06 15:04:02 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/06 15:05:35 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,4 +60,4 @@ test:
 	cat tests/env | ./minishell
 	cat tests/cd | ./minishell
 
-.PHONY : all re clean fclean
+.PHONY : all re clean fclean test
