@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 14:09:50 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 14:29:06 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 
 	ok = 0;
 	if (ft_strcmp(input[0], "cd") == 0)
-		ft_printf("Command to be built : cd\n");
+		cmd_cd(input, envcpy);
 	else if (ft_strcmp(input[0], "env") == 0)
 		ft_printf("Command to be built : env\n");
 	else if (ft_strcmp(input[0], "setenv") == 0)

@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/06 14:12:53 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/06 14:24:22 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC =	main.c\
 		echo.c\
 		cmd_exec.c\
 		disp_help.c\
-		env.c
+		env.c\
+		cmd_cd.c
 
 OBJ = $(SRC:.c=.o)
 
