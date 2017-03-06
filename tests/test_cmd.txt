@@ -1,0 +1,9 @@
+env
+echo
+cd
+dispenv
+ls
+cat
+mkdir
+cp
+exit

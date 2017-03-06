@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 10:00:32 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 10:13:12 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 		if (ok == -1)
 			ft_printf("Minishell: Command not found: %s\n", input[0]);
 		else
-			ft_printf("Execution de %s", tmp_path[ok]);
+			ft_printf("Execution de %s\n", tmp_path[ok]);
 	}
 }
 
