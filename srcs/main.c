@@ -6,14 +6,36 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 17:13:03 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 10:00:32 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	what_cmd(char **input, char **envcpy)
+int		test_access(char **path, int size)
 {
+	int retval;
+	int i;
+
+	i = 0;
+	retval = -1;
+	/*
+	 *retval = -1 = command not found
+	 */
+	while (i < size)
+	{
+		if (access(path[i], F_OK) == 0)
+			retval = i;
+		i++;
+	}
+	return (retval);
+}
+
+void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
+{
+	int ok;
+
+	ok = 0;
 	if (ft_strcmp(input[0], "cd") == 0)
 		ft_printf("Command to be built : cd\n");
 	else if (ft_strcmp(input[0], "env") == 0)
@@ -30,7 +52,13 @@ void	what_cmd(char **input, char **envcpy)
 		ft_printf("Help section will soonly be displayed here\n");
 	//OPTI : tableau de Pointeur sur fonctions
 	else
-		ft_printf("Minishell: Command not found: %s\n", input[0]);
+	{
+		ok = test_access(tmp_path, size);
+		if (ok == -1)
+			ft_printf("Minishell: Command not found: %s\n", input[0]);
+		else
+			ft_printf("Execution de %s", tmp_path[ok]);
+	}
 }
 
 int		main(int argc, char **argv, char **environ)
@@ -57,7 +85,7 @@ int		main(int argc, char **argv, char **environ)
 			tmp_path = add_bin_to_tab(tmp_path, input[0], data.nb_bin);
 			if (ft_strcmp(line, "exit") == 0)
 				exit(EXIT_SUCCESS);
-			what_cmd(input, envcpy);
+			what_cmd(input, envcpy, data.nb_bin, tmp_path);
 		}
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 	}
