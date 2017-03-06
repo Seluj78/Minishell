@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   cmd_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 11:19:11 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/06 11:13:52 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/06 11:19:31 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../includes/minishell.h"
 
-# include "../libft/includes/libft.h"
-
-typedef struct  s_data
+void	cmd_exec(char *exec, char **input, char **env)
 {
-	int nb_bin;
-}                               t_data;
-
-char	**path_parser(char **env, t_data *data);
-char **add_bin_to_tab(char **tab, char *bin, int nb_bin);
-void	cmd_echo(char **input);
-void	cmd_exec(char *exec, char **input, char **env);
-
-#endif
+	pid_t	pid;
+	pid = fork();
+	if (pid > 0)
+		wait(0);
+	else
+			execve(exec, input, env);
+}

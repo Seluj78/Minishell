@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 10:47:09 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 11:17:14 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ int		test_access(char **path, int size)
 
 	i = 0;
 	retval = -1;
-	/*
-	 *retval = -1 = command not found
-	 */
 	while (i < size)
 	{
 		if (access(path[i], F_OK) == 0)
@@ -57,7 +54,7 @@ void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 		if (ok == -1)
 			ft_printf("Minishell: Command not found: %s\n", input[0]);
 		else
-			ft_printf("Execution de %s\n", tmp_path[ok]);
+			cmd_exec(tmp_path[ok], input, envcpy);
 	}
 }
 

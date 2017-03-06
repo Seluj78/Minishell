@@ -30,12 +30,4 @@ la
 oui
 :
 
-cd
-env
-setenv
-unsetenv
-echo
-dispenv
-help
-
 exit

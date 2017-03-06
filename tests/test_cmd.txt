@@ -1,9 +1,8 @@
-env
-echo
-cd
-dispenv
-ls
-cat
-mkdir
-cp
-exit
+cat Makefile
+cp main.o lol
+date
+df
+hostname
+mkdir TEST
+mv lol lol2
+test

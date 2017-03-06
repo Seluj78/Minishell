@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/06 11:09:46 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/06 11:22:39 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = minishell
 
 SRC =	main.c\
 		path_parser.c\
-		echo.c
+		echo.c\
+		cmd_exec.c
 
 OBJ = $(SRC:.c=.o)
 
