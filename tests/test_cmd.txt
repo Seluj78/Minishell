@@ -1,9 +1,0 @@
-cat Makefile
-cp main.o lol
-date
-df
-hostname
-mkdir TEST
-mv lol lol2
-test
-help
