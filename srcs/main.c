@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 12:55:53 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 14:09:50 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		test_access(char **path, int size)
 	return (retval);
 }
 
-void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
+void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 {
 	//OPTI : tableau de Pointeur sur fonctions
 	int ok;
@@ -39,13 +39,13 @@ void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 	else if (ft_strcmp(input[0], "env") == 0)
 		ft_printf("Command to be built : env\n");
 	else if (ft_strcmp(input[0], "setenv") == 0)
-		ft_printf("Command to be built : setenv\n");
+		command_setenv(input, envcpy);
 	else if (ft_strcmp(input[0], "unsetenv") == 0)
-		ft_printf("Command to be built : unsetenv\n");
+		command_unsetenv(input ,envcpy);
 	else if (ft_strcmp(input[0], "echo") == 0)
 		cmd_echo(input);
 	else if (ft_strcmp(input[0], "dispenv") == 0)
-		ft_print_array(envcpy);
+		ft_print_array(*envcpy);
 	else if (ft_strcmp(input[0], "help") == 0)
 		disp_help();
 	else
@@ -54,7 +54,7 @@ void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 		if (ok == -1)
 			ft_printf("Minishell: Command not found: %s\n", input[0]);
 		else
-			cmd_exec(tmp_path[ok], input, envcpy);
+			cmd_exec(tmp_path[ok], input, *envcpy);
 	}
 }
 
@@ -82,14 +82,15 @@ int		main(int argc, char **argv, char **environ)
 			tmp_path = add_bin_to_tab(tmp_path, input[0], data.nb_bin);
 			if (ft_strcmp(line, "exit") == 0)
 				exit(EXIT_SUCCESS);
-			what_cmd(input, envcpy, data.nb_bin, tmp_path);
+			what_cmd(input, &envcpy, data.nb_bin, tmp_path);
 		}
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 	}
 	return (0);
 }
 
-
+// TODO : ls apres un unsetenv donne un command not found donc parser 
+// le path a chaques fois a partir de la copy de l'env
 
 
 /*

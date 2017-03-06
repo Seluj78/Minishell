@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/06 12:56:03 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/06 14:12:53 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC =	main.c\
 		path_parser.c\
 		echo.c\
 		cmd_exec.c\
-		disp_help.c
+		disp_help.c\
+		env.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -59,5 +60,6 @@ test:
 	cat tests/test_errors.txt | ./minishell
 	cat tests/test_cmd.txt | ./minishell
 	cat tests/test_echo.txt | ./minishell
+	cat tests/test_builtins.txt | ./minishell
 
 .PHONY : all re clean fclean
