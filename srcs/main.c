@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 10:13:12 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 10:47:09 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 	else if (ft_strcmp(input[0], "unsetenv") == 0)
 		ft_printf("Command to be built : unsetenv\n");
 	else if (ft_strcmp(input[0], "echo") == 0)
-		ft_printf("Command to be built : echo\n");
+		cmd_echo(input);
 	else if (ft_strcmp(input[0], "dispenv") == 0)
 		ft_print_array(envcpy);
 	else if (ft_strcmp(input[0], "help") == 0)

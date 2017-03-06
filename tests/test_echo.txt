@@ -1,0 +1,6 @@
+echo
+echo lol
+echo bonjour ca va
+echo lol \n
+echo "lol \n\n\n"
+echo exit

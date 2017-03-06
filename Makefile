@@ -6,21 +6,15 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/06 10:19:32 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/06 11:09:46 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC =	main.c\
-		path_parser.c
-		#env.c\
-		cmd_parser.c\
-		break_str_to_tab_sep.c\
-		ft_add_to_array.c\
-		ft_free_array.c\
-		ft_arraylen.c\
-		ft_remove_from_array.c#
+		path_parser.c\
+		echo.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -61,7 +55,7 @@ test:
 	make
 	cat tests/test_exit.txt | ./minishell
 	cat tests/test_errors.txt | ./minishell
-	@#cat tests/test_env.txt | ./minishell#
 	cat tests/test_cmd.txt | ./minishell
+	cat tests/test_echo.txt | ./minishell
 
 .PHONY : all re clean fclean

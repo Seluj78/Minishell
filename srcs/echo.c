@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 10:48:28 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/06 10:47:12 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/06 11:08:08 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
 
-# include "../libft/includes/libft.h"
+#include "../includes/minishell.h"
 
-typedef struct  s_data
+void	cmd_echo(char **input)
 {
-	int nb_bin;
-}                               t_data;
+	int i;
+	int size;
 
-char	**path_parser(char **env, t_data *data);
-char **add_bin_to_tab(char **tab, char *bin, int nb_bin);
-void	cmd_echo(char **input);
-
-#endif
+	size = ft_arraylen(input);
+	i = 1;
+	if (size == 1)
+	{
+		ft_putchar('\n');
+		return ;
+	}
+	while (i < size)
+	{
+		ft_printf("%s", input[i]);
+		if (i < (size - 1))
+			ft_putchar(' ');
+		else
+			ft_putchar('\n');
+		i++;
+	}
+}
