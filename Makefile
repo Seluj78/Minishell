@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/06 10:12:54 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/06 10:19:32 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ INC = -I includes
 
 LIBFT =	libft/libft.a
 
-CC = clang
+CC = gcc
 
 FLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
 
