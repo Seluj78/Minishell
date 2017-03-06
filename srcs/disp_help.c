@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   disp_help.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 12:56:16 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/06 12:52:53 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/06 12:56:56 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../includes/minishell.h"
 
-# include "../libft/includes/libft.h"
-
-typedef struct  s_data
+void	disp_help(void)
 {
-	int nb_bin;
-}                               t_data;
-
-char	**path_parser(char **env, t_data *data);
-char **add_bin_to_tab(char **tab, char *bin, int nb_bin);
-void	cmd_echo(char **input);
-void	cmd_exec(char *exec, char **input, char **env);
-void	disp_help(void);
-
-#endif
+	ft_printf("/* ****************************** */\n");
+	ft_printf("/*                                */\n");
+	ft_printf("/*  ~ Minishell ~                 */\n");
+	ft_printf("/*    Built by jlasne             */\n");
+	ft_printf("/*                                */\n");
+	ft_printf("/* ****************************** */\n");
+}

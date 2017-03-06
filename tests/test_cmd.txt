@@ -6,3 +6,4 @@ hostname
 mkdir TEST
 mv lol lol2
 test
+help

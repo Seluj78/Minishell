@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 11:17:14 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/06 12:55:53 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		test_access(char **path, int size)
 
 void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 {
+	//OPTI : tableau de Pointeur sur fonctions
 	int ok;
 
 	ok = 0;
@@ -46,8 +47,7 @@ void	what_cmd(char **input, char **envcpy, int size, char **tmp_path)
 	else if (ft_strcmp(input[0], "dispenv") == 0)
 		ft_print_array(envcpy);
 	else if (ft_strcmp(input[0], "help") == 0)
-		ft_printf("Help section will soonly be displayed here\n");
-	//OPTI : tableau de Pointeur sur fonctions
+		disp_help();
 	else
 	{
 		ok = test_access(tmp_path, size);
