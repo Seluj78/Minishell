@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 14:29:06 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/07 15:59:29 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ int		test_access(char **path, int size)
 	return (retval);
 }
 
+void	env(char ***env, char **input, char **tmp_path, int size)
+{
+	(void)tmp_path;
+	(void)size;
+	int ok;
+
+	ok = 0;
+	if (input[1] == NULL)
+		ft_print_array(*env);
+}
+
 void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 {
 	//OPTI : tableau de Pointeur sur fonctions
@@ -37,7 +48,7 @@ void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 	if (ft_strcmp(input[0], "cd") == 0)
 		cmd_cd(input, envcpy);
 	else if (ft_strcmp(input[0], "env") == 0)
-		ft_printf("Command to be built : env\n");
+		env(envcpy, input, tmp_path, size);
 	else if (ft_strcmp(input[0], "setenv") == 0)
 		command_setenv(input, envcpy);
 	else if (ft_strcmp(input[0], "unsetenv") == 0)
@@ -58,6 +69,22 @@ void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 	}
 }
 
+int		ft_default_env(char ***env)
+{
+	struct passwd	*passwd;
+
+	if (!(*env = (char **)ft_memalloc(sizeof(char*))))
+		return (FALSE);
+	*env = ft_setenv("PATH", DPATH, *env);
+	if ((passwd = getpwuid(getuid())))
+	{
+		*env = ft_setenv("USER", passwd->pw_name, *env);
+		*env = ft_setenv("HOME", passwd->pw_dir, *env);
+	}
+	*env = ft_setenv("SHLVL", "1", *env);
+	return (TRUE);
+}
+
 int		main(int argc, char **argv, char **environ)
 {
 	(void)argc;
@@ -68,10 +95,18 @@ int		main(int argc, char **argv, char **environ)
 	char **envcpy;
 	char **path;
 	char **tmp_path;
+	char cwd[1024];
 	t_data data;
 
-	envcpy = ft_tabdup(environ);
+
+
+	if (!environ || !environ[0] || !(envcpy = ft_tabdup(environ)))
+		if (!ft_default_env(&envcpy))
+			return (ft_printf("ERROR"));
 	path = path_parser(envcpy, &data);
+
+	getcwd(cwd, sizeof(cwd));
+	envcpy = ft_setenv("PWD", cwd, envcpy);
 	ft_printf("{:blue}[{:lred}Minishell{:blue}] {:lgreen}➜{:reset} ");
 	while (get_next_line(0, &line))
 	{
@@ -96,24 +131,7 @@ int		main(int argc, char **argv, char **environ)
 /*
 
 
-   if (environ[0] == NULL) il faudra executer ca :
 
-   int		ft_default_env(t_config *config)
-   {
-   t_passwd	*passwd;
-
-   ft_free_config(config);
-   if (!(config->env = (char **)ft_memalloc(sizeof(char*))))
-   return (false);
-   ft_setenv("PATH", DPATH, config);
-   if ((passwd = getpwuid(getuid())))
-   {
-   ft_setenv("USER", passwd->pw_name, config);
-   ft_setenv("HOME", passwd->pw_dir, config);
-   }
-   ft_setenv("SHLVL", "1", config);
-   return (true);
-   }
 
 
 
