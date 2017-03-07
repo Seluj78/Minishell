@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 14:23:09 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/07 13:39:15 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/07 14:09:58 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,19 @@ void	cmd_cd(char **input, char ***env)
 
 	if (input[1] == NULL)
 	{
+		*env = ft_setenv("OLDPWD", getcharenv(*env, "PWD"), *env);
 		if (chdir(getcharenv(*env, "HOME")) == -1)
 			ft_printf("cd: HOME not set\n");
 	}
+	else if (ft_strcmp(input[1], "-") == 0)
+	{
+		char *tmp = getcharenv(*env, "PWD");
+		chdir(getcharenv(*env, "OLDPWD"));
+		*env = ft_setenv("OLDPWD", tmp, *env);
+	}
 	else
 	{
+		*env = ft_setenv("OLDPWD", getcharenv(*env, "PWD"), *env);
 		if (chdir(input[1]) == -1)
 			ft_printf("cd: no such file or directory: %s\n", input[1]);
 	}
