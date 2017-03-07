@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/07 15:59:29 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/07 16:00:08 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,16 +125,3 @@ int		main(int argc, char **argv, char **environ)
 }
 
 // TODO : ls apres un unsetenv donne un command not found donc parser 
-// le path a chaques fois a partir de la copy de l'env
-
-
-/*
-
-
-
-
-
-
-
-
-*/
