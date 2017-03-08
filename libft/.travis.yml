@@ -1,0 +1,4 @@
+script: make re
+language: c
+os: osx
+compiler: clang

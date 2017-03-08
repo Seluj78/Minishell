@@ -5,180 +5,121 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 16:13:14 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/02 14:02:56 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/07 16:00:08 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		test_path_access(char **path, int size, char *bin)
+int		test_access(char **path, int size)
 {
-		int i;
-		int ok;
+	int retval;
+	int i;
 
-		ok = -1;
-		i = 0;
-		while (i < size)
-		{
-				if (access(path[i], F_OK) == 0)
-				{
-						ok = i;
-				}
-				else
-				{
-						if (ft_strcmp(bin, "cd") == 0)
-								ok = -2;
-						if (ft_strcmp(bin, "env") == 0)
-								ok = -2;
-						if (ft_strcmp(bin, "setenv") == 0)
-								ok = -2;
-						if (ft_strcmp(bin, "unsetenv") == 0)
-								ok = -2;
-						//TODO : -2 = builtin command
+	i = 0;
+	retval = -1;
+	while (i < size)
+	{
+		if (access(path[i], F_OK) == 0)
+			retval = i;
+		i++;
+	}
+	return (retval);
+}
 
-				}
-				i++;
-		}
-		if (ok != -1)
-				return (ok);
+void	env(char ***env, char **input, char **tmp_path, int size)
+{
+	(void)tmp_path;
+	(void)size;
+
+	if (input[1] == NULL)
+		ft_print_array(*env);
+}
+
+void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
+{
+	//OPTI : tableau de Pointeur sur fonctions
+	int ok;
+
+	ok = 0;
+	if (ft_strcmp(input[0], "cd") == 0)
+		cmd_cd(input, envcpy);
+	else if (ft_strcmp(input[0], "env") == 0)
+		env(envcpy, input, tmp_path, size);
+	else if (ft_strcmp(input[0], "setenv") == 0)
+		command_setenv(input, envcpy);
+	else if (ft_strcmp(input[0], "unsetenv") == 0)
+		command_unsetenv(input ,envcpy);
+	else if (ft_strcmp(input[0], "echo") == 0)
+		cmd_echo(input);
+	else if (ft_strcmp(input[0], "dispenv") == 0)
+		ft_print_array(*envcpy);
+	else if (ft_strcmp(input[0], "help") == 0)
+		disp_help();
+	else
+	{
+		ok = test_access(tmp_path, size);
+		if (ok == -1)
+			ft_printf("Minishell: Command not found: %s\n", input[0]);
 		else
-		{
-				if (ok == -2)
-						//Builtin
-				else
-						ft_printf("Minishell : command not found: %s\n", bin);
-				return (-1);
-				// TODO : Add protection in case of error with the return value in  main
-		}
+			cmd_exec(tmp_path[ok], input, *envcpy);
+	}
 }
 
-void	free_chartab(char **tab, int size)
+int		ft_default_env(char ***env)
 {
-		int i;
+	struct passwd	*passwd;
 
-		i = 0;
-		while (i < size)
-		{
-				free(tab[i]);
-				i++;
-		}
-		free(tab);
-}
-
-int		ft_tablen(char **tab)
-{
-		int i;
-
-		i = 0;
-		while (tab[i] != '\0')
-				i++;
-		return (i);
-}
-
-char	**ft_tabdup(char **tab)
-{
-		int i;
-		int j;
-		char **dup;
-
-		j = 0;
-		i = 0;
-		while (tab[i] != '\0')
-				i++;
-		dup = malloc(i * sizeof(char *));
-		while (j < i)
-		{
-				dup[j] = ft_strdup(tab[j]);
-				j++;
-		}
-		return (dup);
-}
-
-// TODO : Display the copy of env, the one that we will modifiy with setenv etc..
-// TODO : add this as ft_put_arraystring(char **array) in libft
-void	ft_disp_env(char **env)
-{
-		int i;
-
-		i = 0;
-		while (env[i] != '\0')
-		{
-				ft_printf("%s\n", env[i]);
-				i++;
-		}
+	if (!(*env = (char **)ft_memalloc(sizeof(char*))))
+		return (FALSE);
+	*env = ft_setenv("PATH", DPATH, *env);
+	if ((passwd = getpwuid(getuid())))
+	{
+		*env = ft_setenv("USER", passwd->pw_name, *env);
+		*env = ft_setenv("HOME", passwd->pw_dir, *env);
+	}
+	*env = ft_setenv("SHLVL", "1", *env);
+	return (TRUE);
 }
 
 int		main(int argc, char **argv, char **environ)
 {
-		char	*line;
-		char	**cmd;
-		char	**path;
-		char	**tmp_path;
-		char	**env;
-		pid_t	pid;
-		t_data data;
-		int ok;
+	(void)argc;
+	(void)argv;
+	(void)environ;
+	char *line;
+	char **input;
+	char **envcpy;
+	char **path;
+	char **tmp_path;
+	char cwd[1024];
+	t_data data;
 
-		data.nb_bin = 0;
-		(void)argc;
-		(void)argv;
-		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
-		env = ft_tabdup(environ);
-		path = path_parser(env, &data);
-		while (get_next_line(0, &line))
+
+
+	if (!environ || !environ[0] || !(envcpy = ft_tabdup(environ)))
+		if (!ft_default_env(&envcpy))
+			return (ft_printf("ERROR"));
+	path = path_parser(envcpy, &data);
+
+	getcwd(cwd, sizeof(cwd));
+	envcpy = ft_setenv("PWD", cwd, envcpy);
+	ft_printf("{:blue}[{:lred}Minishell{:blue}] {:lgreen}➜{:reset} ");
+	while (get_next_line(0, &line))
+	{
+		if (ft_strcmp(line, "\n") > 0)
 		{
-				cmd = str_to_wordtab(line);
-				if (ft_strcmp(cmd[0], "exit") == 0)
-						exit(EXIT_SUCCESS);
-				tmp_path = ft_tabdup(path);
-				tmp_path = add_bin_to_tab(tmp_path, cmd[0], data.nb_bin);
-				ok = test_path_access(tmp_path, data.nb_bin, cmd[0]);
-				pid = fork();
-				if (pid > 0)
-				{
-						wait(0);
-				}
-				else
-				{
-						if (ft_strcmp(cmd[0], "cd") == 0)
-								ft_printf("Command to be built : cd\n");
-						else if (ft_strcmp(cmd[0], "env") == 0)
-								ft_disp_env(env); //look forum, c'est pas comme ca que env marche
-						else if (ft_strcmp(cmd[0], "setenv") == 0)
-								ft_printf("Command to be built : setenv\n");
-						else if (ft_strcmp(cmd[0], "unsetenv") == 0)
-								ft_printf("Command to be built : unsetenv\n");
-						else
-								execve(tmp_path[ok], cmd, NULL);
-				}
-				//TODO : Rework this free, makes program crash : free_chartab(tmp_path, ft_tablen(tmp_path));
-				ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+			input = ft_str_to_tab_sep(line, ' ', 0);
+			tmp_path = ft_tabdup(path);
+			tmp_path = add_bin_to_tab(tmp_path, input[0], data.nb_bin);
+			if (ft_strcmp(line, "exit") == 0)
+				exit(EXIT_SUCCESS);
+			what_cmd(input, &envcpy, data.nb_bin, tmp_path);
 		}
-		return (0);
+		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
+	}
+	return (0);
 }
 
-// TODO : pressing return without typing anything = segfault
-// TODO : fix the exit command, won't exit correctly (asks numerous times to exit)
-// TODO : ft_exit to free correctly everything)
-// TODO : Implementer cd - (go google) et du coup add oldpwd dans path
-// TODO : Utiliser signal pour catch les signaux de segfault etc...
-
-/*
-   ETAPE 5 SETENV
-   ajouter un element a la fin du tableau. Pour ca, il va falloir
-   faire un realloc, c’est a dire free(env) (sauf si c’est le tableau de depart)
-   malloc(la taille du tableau d’avant + 1). pareil, si l’element existe,
-   il faut le modifier.
- */
-
-/*
-   ETAPE 6 UNSETENV
-   parcourir le tableau, trouver (ou pas) l’element, realloc le
-   tableau en enlevant l’elem.
- */
-
-/*
-   ETAPE 7 CD
-   la, je me contenterait de vous dire "chdir". Et man. Et google.
- */
+// TODO : ls apres un unsetenv donne un command not found donc parser 

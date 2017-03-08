@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   ft_print_array.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:38:28 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/20 14:39:29 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 13:27:05 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/03 13:28:58 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
-int		ft_free_array(char **arr)
+void	ft_print_array(char **arr)
 {
-	int		i;
+	int i;
 
-	if (arr == NULL)
-		return (1);
 	i = 0;
-	while (arr[i] != NULL)
+	while (arr[i] != '\0')
 	{
-		free(arr[i]);
-		i = i + 1;
+		ft_printf("%s\n", arr[i]);
+		i++;
 	}
-	if (arr != NULL)
-		free(arr);
-	return (1);
 }
-
-// TODO : ADD TO LIBFT

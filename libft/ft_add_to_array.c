@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:32:39 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/02 12:59:58 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/03 11:41:13 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/03 11:52:56 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
-char		**malloc_from_arr(char *str, char **arr)
+static char		**malloc_from_arr(char *str, char **arr)
 {
 	int		i;
-	char		**new_arr;
+	char	**new_arr;
 
 	i = 0;
 	while (arr[i] != NULL)
@@ -35,7 +35,7 @@ char		**malloc_from_arr(char *str, char **arr)
 	return (new_arr);
 }
 
-char		**ft_add_to_array(char *str, char **arr)
+char			**ft_add_to_array(char *str, char **arr)
 {
 	char		**new_arr;
 
@@ -51,5 +51,3 @@ char		**ft_add_to_array(char *str, char **arr)
 		return (malloc_from_arr(str, arr));
 	return (new_arr);
 }
-
-// TODO : Add to libft
