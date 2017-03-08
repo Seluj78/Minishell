@@ -46,5 +46,5 @@ int		command_setenv(char **argv, char ***env);
 int		command_unsetenv(char **argv, char ***env);
 void	cmd_cd(char **input, char ***env);
 char		**ft_setenv(char *name, char *value, char **env);
-
+int             ft_getenv(char *name, char **env);
 #endif
