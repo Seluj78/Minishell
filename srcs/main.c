@@ -41,16 +41,11 @@ int		test_path_access(char **path, int size, char *bin)
 				i++;
 		}
 		if (ok != -1)
-		{
-				//ft_printf("Command found in %d of path[i]\n", ok);
 				return (ok);
-		}
 		else
 		{
 				if (ok == -2)
-				{
 						//Builtin
-				}
 				else
 						ft_printf("Minishell : command not found: %s\n", bin);
 				return (-1);
