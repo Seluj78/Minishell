@@ -88,6 +88,13 @@ int		ft_default_env(char ***env)
 		return (TRUE);
 }
 
+void	direct_path(char **input, char ***envcpy)
+{
+		(void)envcpy;
+		(void)input;
+		ft_printf("Direct path ! :D");
+}
+
 int		main(int argc, char **argv, char **environ)
 {
 		(void)argc;
@@ -116,6 +123,8 @@ int		main(int argc, char **argv, char **environ)
 				if (ft_strcmp(line, "\n") > 0)
 				{
 						input = ft_str_to_tab_sep(line, ' ', 0);
+						//if (ft_strchr(input[1], '/') != NULL)
+						//		direct_path(input, &envcpy);
 						tmp_path = ft_tabdup(path);
 						tmp_path = add_bin_to_tab(tmp_path, input[0], data.nb_bin);
 						if (ft_strcmp(line, "exit") == 0)
@@ -127,4 +136,4 @@ int		main(int argc, char **argv, char **environ)
 		return (0);
 }
 
-// TODO : ls apres un unsetenv donne un command not found donc parser 
+// TODO : ls apres un unsetenv donne un command not found donc parser
