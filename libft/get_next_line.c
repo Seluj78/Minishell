@@ -6,76 +6,115 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:32:11 by jlasne            #+#    #+#             */
-/*   Updated: 2017/02/03 16:33:46 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:38:07 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/get_next_line.h"
 
-char	*ft_putline(char **buff, char **line)
+void					free_chain(t_fd *fdptr)
 {
-	char		*pos;
-
-	pos = ft_strchr(*buff, '\n');
-	if (pos)
-		*pos = 0;
-	if (!*line)
-		*line = ft_strdup(*buff);
+	if (fdptr->prev)
+		fdptr->prev->next = fdptr->next;
 	else
-		*line = ft_strjoin((char *)*line, *buff);
-	if (pos && pos[1])
-		*buff = ft_strcpy(*buff, pos + 1);
-	else if ((pos && !pos[1]) || !pos)
-		ft_bzero((void *)*buff, ft_strlen(*buff));
-	return (pos);
+		*fdptr->begin = fdptr->next;
+	if (fdptr->next)
+		fdptr->next->prev = fdptr->prev;
+	free (fdptr->original_ptr);
+	free (fdptr);
 }
 
-int		ft_read(int const fd, char **buff, char **line)
+t_fd					*get_fd_ptr(int fd)
 {
-	char		*pos;
-	int			rd;
+	static t_fd			*fd_chaine_list = NULL;
+	t_fd				*fdptr;
 
-	rd = 1;
-	pos = NULL;
-	while (rd != 0)
+	fdptr = fd_chaine_list;
+	while (fdptr && fdptr->fd != fd)
+		fdptr = fdptr->next;
+	if (!fdptr)
 	{
-		rd = read(fd, *buff, BUFF_SIZE);
-		if (rd < 0)
-			return (-1);
-		if (rd == 0)
-			return (0);
-		(*buff)[rd] = 0;
-		pos = ft_putline(buff, &(*line));
-		if (pos)
-			return (1);
+		fdptr = (t_fd*)malloc(sizeof(t_fd));
+		fdptr->fd = fd;
+		fdptr->original_ptr = NULL;
+		fdptr->current_ptr = NULL;
+		fdptr->next = fd_chaine_list;
+		fdptr->prev = NULL;
+		fdptr->begin = &fd_chaine_list;
+		if (fd_chaine_list)
+			fd_chaine_list->prev = fdptr;
+		fd_chaine_list = fdptr;
 	}
-	return (0);
+	return (fdptr);
 }
 
-int		get_next_line(int const fd, char **line)
+void					set_fd_ptr(int size, char *buf, t_fd *fdptr, int i)
 {
-	static char	*buff;
-	int			rd;
-	char		*ret;
+	char				*tmp;
 
-	if (BUFF_SIZE <= 0 || fd < 0 || line == NULL)
+	tmp = (char *)malloc(sizeof(char) * (size + i + 1));
+	i = 0;
+	while (fdptr->current_ptr && fdptr->current_ptr[i])
+	{
+		tmp[i] = fdptr->current_ptr[i];
+		i++;
+	}
+	if (fdptr->original_ptr)
+		free(fdptr->original_ptr);
+	fdptr->original_ptr = tmp;
+	fdptr->current_ptr = tmp;
+	tmp += i;
+	i = 0;
+	while (i < size)
+	{
+		tmp[i] = buf[i];
+		i++;
+	}
+	tmp[i] = '\0';
+}
+
+int						get_line(t_fd *fdptr, char **line)
+{
+	int					i;
+
+	i = 0;
+	while (fdptr->current_ptr && fdptr->current_ptr[i] &&
+			fdptr->current_ptr[i] != '\n')
+		i++;
+	if (fdptr->current_ptr && fdptr->current_ptr[i] == '\n')
+	{
+		fdptr->current_ptr[i] = '\0';
+		*line = fdptr->current_ptr;
+		fdptr->current_ptr += i + 1;
 		return (-1);
-	*line = NULL;
-	rd = 0;
-	if (!buff)
-	{
-		buff = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
-		buff[0] = 0;
 	}
-	if (ft_strchr((buff), '\n') || buff[0])
+	return (i);
+}
+
+int						get_next_line(int fd, char **line)
+{
+	t_fd				*fdptr;
+	char				buf[BUFFER_SIZE];
+	int					i;
+	int					size;
+
+	i = 0;
+	size = 0;
+	fdptr = get_fd_ptr(fd);
+	if ((i = get_line(fdptr, line)) == -1)
+		return (1);
+	size = (int)read(fd, buf, BUFFER_SIZE);
+	if (size == 0 && fdptr->current_ptr && fdptr->current_ptr[0] != '\0')
 	{
-		ret = ft_putline(&buff, line);
-		if (ret)
-			rd = 1;
+		*line = fdptr->current_ptr;
+		fdptr->current_ptr += i;
+		return (1);
 	}
-	if (rd == 0)
-		rd = ft_read(fd, &buff, line);
-	if (*line)
-		rd = 1;
-	return (rd);
+	if (size <= 0)
+	{
+		free_chain(fdptr);
+		return (size);
+	}
+	set_fd_ptr(size, buf, fdptr, i);
+	return (get_next_line(fd, line));
 }

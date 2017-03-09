@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/09 11:01:54 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:44:38 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,15 @@ void	direct_path(char **input, char ***envcpy)
 {
 	(void)envcpy;
 	(void)input;
-	ft_printf("Direct path ! :D");
+	if (access(input[0], F_OK) == 0)
+		cmd_exec(input[0], input, *envcpy);
+	else
+		ft_printf("Minishell: Error: Command not found");
 }
 
 int		main(int argc, char **argv, char **environ)
 {
-		(void)argc;
+	(void)argc;
 	(void)argv;
 	(void)environ;
 	char *line;
@@ -123,18 +126,21 @@ int		main(int argc, char **argv, char **environ)
 		if (ft_strcmp(line, "\n") > 0)
 		{
 			input = ft_str_to_tab_sep(line, ' ', 0);
-			//if (ft_strchr(input[1], '/') != NULL)
-			//		direct_path(input, &envcpy);
 			tmp_path = ft_tabdup(path);
 			tmp_path = add_bin_to_tab(tmp_path, input[0], data.nb_bin);
 			if (ft_strcmp(line, "exit") == 0)
 				exit(EXIT_SUCCESS);
-			what_cmd(input, &envcpy, data.nb_bin, tmp_path);
+			if (ft_strchr(input[0], '/') != NULL)
+				direct_path(input, &envcpy);
+			else
+				what_cmd(input, &envcpy, data.nb_bin, tmp_path);
+
 		}
+		ft_free_array(input);
+		ft_free_array(tmp_path);
 		ft_printf("{:blue}[{:lred}MiniShell{:blue}] {:lgreen}➜{:reset} ");
 	}
+	ft_free_array(path);
+	ft_free_array(envcpy);
 	return (0);
 }
-
-// TODO : ls apres un unsetenv donne un command not found donc parser
-// pouvoir executer / entrer dans un dossier en donnant le path (strchr avec '/')

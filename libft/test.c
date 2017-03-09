@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 10:47:12 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/09 11:21:08 by jlasne           ###   ########.fr       */
+/*   Created: 2017/03/09 11:31:08 by jlasne            #+#    #+#             */
+/*   Updated: 2017/03/09 11:33:48 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/libft.h"
 
-void	cmd_echo(char **input)
+int main(int argc, char **argv)
 {
-	int i;
-	int size;
+	int fd;
+	char *line;
+	fd = open("Makefile", O_RDONLY);
 
-	size = ft_arraylen(input);
-	i = 1;
-	if (size == 1)
-	{
-		ft_putchar('\n');
-		return ;
-	}
-	while (i < size)
-	{
-		ft_printf("%s", input[i]);
-		if (i < (size - 1))
-			ft_putchar(' ');
-		else
-			ft_putchar('\n');
-		i++;
-	}
+	get_next_line(fd, &line);
+	ft_printf("%s\n", line);
+
 }
