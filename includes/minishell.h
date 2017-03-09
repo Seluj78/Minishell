@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/07 15:36:47 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/07 16:21:38 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int		command_setenv(char **argv, char ***env);
 int		command_unsetenv(char **argv, char ***env);
 void	cmd_cd(char **input, char ***env);
 char		**ft_setenv(char *name, char *value, char **env);
+void    sigHandle(int keep);
 
 #endif

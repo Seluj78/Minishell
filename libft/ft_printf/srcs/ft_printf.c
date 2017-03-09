@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 19:27:58 by jlasne            #+#    #+#             */
-/*   Updated: 2016/12/16 13:27:54 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/07 16:48:25 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int				ft_printf(const char *format, ...)
 			ft_putchar(data.format[data.index]);
 			data.ret++;
 		}
-		if (!data.format[data.index])
-			break ;
+		//if (!data.format[data.index])
+		//	break ;
 		data.index++;
 	}
 	va_end(ap);

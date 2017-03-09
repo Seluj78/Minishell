@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/07 16:00:08 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/07 16:23:26 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		main(int argc, char **argv, char **environ)
 	t_data data;
 
 
-
+	signal(SIGINT, sigHandle);
 	if (!environ || !environ[0] || !(envcpy = ft_tabdup(environ)))
 		if (!ft_default_env(&envcpy))
 			return (ft_printf("ERROR"));
@@ -124,4 +124,5 @@ int		main(int argc, char **argv, char **environ)
 	return (0);
 }
 
-// TODO : ls apres un unsetenv donne un command not found donc parser 
+// TODO : ls apres un unsetenv donne un command not found donc parser
+// pouvoir executer / entrer dans un dossier en donnant le path (strchr avec '/')
