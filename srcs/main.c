@@ -49,8 +49,6 @@ void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 		command_unsetenv(input, envcpy);
 	else if (ft_strcmp(input[0], "echo") == 0)
 		cmd_echo(input);
-	else if (ft_strcmp(input[0], "dispenv") == 0)
-		ft_print_array(*envcpy);
 	else if (ft_strcmp(input[0], "help") == 0)
 		disp_help();
 	else

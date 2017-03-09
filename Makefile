@@ -61,7 +61,6 @@ re: fclean all
 
 test:
 	make
-	cat tests/env | ./minishell
 	cat tests/cd | ./minishell
 
 .PHONY : all re clean fclean test
