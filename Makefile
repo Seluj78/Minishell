@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/09 11:24:01 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/09 14:01:59 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRC =	main.c\
 		disp_help.c\
 		cmds_env.c\
 		cmd_cd.c\
-		sig_handler.c
+		sig_handler.c\
+		ft_strmjoin.c\
+		help_funcs.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -34,7 +36,7 @@ LIBFT =	libft/libft.a
 
 CC = gcc
 
-FLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
+FLAGS = -g3 -Wall -Wextra -Werror #-fsanitize=address
 
 all: $(NAME)
 

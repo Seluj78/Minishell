@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 11:17:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 12:31:22 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:37:43 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int		ft_wordsnbr(char *str, char separator)
 	return (words);
 }
 
-static char		**ft_alloc_mem(char *str, char **tab, char separator)
+char			**ft_alloc_mem(char *str, char **tab, char separator)
 {
 	int	x;
 	int	w;
@@ -105,8 +105,7 @@ char			**ft_str_to_tab_sep(char *str, char separator, int opt)
 	j = 0;
 	i = 0;
 	temp = ft_do_epur(str, separator, opt);
-	tab = NULL;
-	tab = ft_alloc_mem(temp, tab, separator);
+	ft_str_to_tab_sep_helper(temp, &tab, separator);
 	while (temp[i] != '\0')
 	{
 		k = 0;

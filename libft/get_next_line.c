@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:32:11 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/09 11:38:07 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:10:28 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void					free_chain(t_fd *fdptr)
 		*fdptr->begin = fdptr->next;
 	if (fdptr->next)
 		fdptr->next->prev = fdptr->prev;
-	free (fdptr->original_ptr);
-	free (fdptr);
+	free(fdptr->original_ptr);
+	free(fdptr);
 }
 
 t_fd					*get_fd_ptr(int fd)

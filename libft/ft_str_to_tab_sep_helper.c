@@ -6,13 +6,13 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 12:17:46 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/03 12:20:18 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:31:40 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-char	*ft_strepur(char *str, int a)
+char			*ft_strepur(char *str, int a)
 {
 	int		b;
 	char	*cpy;
@@ -39,4 +39,10 @@ char	*ft_strepur(char *str, int a)
 	if (cpy[ft_strlen(cpy) - 1] == ' ' || cpy[ft_strlen(cpy) - 1] == '\t')
 		cpy[ft_strlen(cpy) - 1] = '\0';
 	return (cpy);
+}
+
+void			ft_str_to_tab_sep_helper(char *temp, char ***tab, char sep)
+{
+	*tab = NULL;
+	*tab = ft_alloc_mem(temp, *tab, sep);
 }

@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 12:57:41 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/09 11:23:50 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:08:21 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*path_dup(char *str, int i, int j)
 {
 	char	*dup;
-	int	k;
+	int		k;
 
 	k = 0;
 	dup = malloc((j - i + 1) * sizeof(*dup));
@@ -33,8 +33,8 @@ static char	*path_dup(char *str, int i, int j)
 
 static char	*get_env(char **env, char *data)
 {
-	int   i;
-	char  *path;
+	int		i;
+	char	*path;
 
 	i = 0;
 	while (env[i] != NULL)
@@ -49,7 +49,7 @@ static char	*get_env(char **env, char *data)
 	return (NULL);
 }
 
-int 	count_path_size(char *path, char sep)
+int			count_path_size(char *path, char sep)
 {
 	int i;
 	int count;
@@ -65,28 +65,12 @@ int 	count_path_size(char *path, char sep)
 	return (count + 1);
 }
 
-char **add_bin_to_tab(char **tab, char *bin, int nb_bin)
-{
-	char	*tmp;
-	int i;
-
-	i = 0;
-	while (i < nb_bin)
-	{
-		tmp = ft_strjoin_sep(tab[i], "/", bin);
-		tab[i] = ft_strdup(tmp);
-		//ft_printf("%s\n", tab[i]);
-		free(tmp);
-		i++;
-	}
-	return (tab);
-}
-
-char	**path_parser(char **env, t_data *data)
+char		**path_parser(char **env, t_data *data)
 {
 	char	**tab;
-	char	*path = NULL;
+	char	*path;
 
+	path = NULL;
 	tab = NULL;
 	if (env[0] == NULL)
 		tab = do_absolute();
@@ -99,7 +83,6 @@ char	**path_parser(char **env, t_data *data)
 			tab = ft_str_to_tab_sep(path, ':', 0);
 	}
 	data->nb_bin = count_path_size(path, ':');
-	//free(path);
-	//return (add_bin_to_tab(tab, bin, data->nb_bin));
+	free(path);
 	return (tab);
 }

@@ -6,43 +6,16 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:30:20 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/06 14:04:05 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:02:42 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		my_strncmp(char *s1, char *s2, int n)
-{
-	int		result;
-	int		i;
-
-	if (n > 0)
-	{
-		result = 0;
-		i = 0;
-		while (i < n
-				&& s1[i] != '\0'
-				&& s2[i] != '\0'
-				&& !result)
-		{
-			result = s1[i] - s2[i];
-			i++;
-		}
-		if (i < n - 1 && s1[i] == '\0' && s2[i] != '\0')
-			return (-100);
-		else if (i < n - 1 && s2[i] == '\0' && s1[i] != '\0')
-			return (100);
-		else
-			return (result);
-	}
-	return (0);
-}
-
-int		ft_getenv(char *name, char **env)
+int			ft_getenv(char *name, char **env)
 {
 	int		i;
-	char		*search;
+	char	*search;
 	int		name_len;
 
 	name_len = ft_strlen(name) + 2;
@@ -70,7 +43,7 @@ char		**ft_setenv(char *name, char *value, char **env)
 {
 	int		i;
 	int		total_len;
-	char		*record;
+	char	*record;
 
 	total_len = ft_strlen(name) + ft_strlen(value) + 2;
 	record = (char*)malloc(sizeof(char) * total_len);
@@ -101,7 +74,7 @@ char		**ft_unsetenv(char *name, char **env)
 	return (env);
 }
 
-int		command_setenv(char **argv, char ***env)
+int			command_setenv(char **argv, char ***env)
 {
 	if (argv[1] != NULL)
 	{
@@ -115,7 +88,7 @@ int		command_setenv(char **argv, char ***env)
 	return (1);
 }
 
-int		command_unsetenv(char **argv, char ***env)
+int			command_unsetenv(char **argv, char ***env)
 {
 	if (argv[1] != NULL)
 		*env = ft_unsetenv(argv[1], *env);

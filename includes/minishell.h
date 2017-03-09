@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/09 11:24:27 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 14:06:54 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef char		t_bool;
 # define FALSE 0
 
 char	**path_parser(char **env, t_data *data);
-char **add_bin_to_tab(char **tab, char *bin, int nb_bin);
 void	cmd_echo(char **input);
 void	cmd_exec(char *exec, char **input, char **env);
 void	disp_help(void);
@@ -46,8 +45,10 @@ int		command_setenv(char **argv, char ***env);
 int		command_unsetenv(char **argv, char ***env);
 void	cmd_cd(char **input, char ***env);
 char		**ft_setenv(char *name, char *value, char **env);
-void    sigHandle(int keep);
+void    sig_handle(int keep);
 int             ft_getenv(char *name, char **env);
 char	**do_absolute(void);
 int		str_is_in(char *str, char *to_find);
+char	*ft_strmjoin(const size_t n, ...);
+int		my_strncmp(char *s1, char *s2, int n);
 #endif
