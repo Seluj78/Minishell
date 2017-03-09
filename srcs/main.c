@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/07 16:23:26 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/09 11:01:54 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	env(char ***env, char **input, char **tmp_path, int size)
 {
 	(void)tmp_path;
 	(void)size;
-	int ok;
 
-	ok = 0;
 	if (input[1] == NULL)
 		ft_print_array(*env);
 }
@@ -61,11 +59,16 @@ void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 		disp_help();
 	else
 	{
-		ok = test_access(tmp_path, size);
-		if (ok == -1)
+		if (ft_getenv("PATH", *envcpy) == -1)
 			ft_printf("Minishell: Command not found: %s\n", input[0]);
 		else
-			cmd_exec(tmp_path[ok], input, *envcpy);
+		{
+			ok = test_access(tmp_path, size);
+			if (ok == -1)
+				ft_printf("Minishell: Command not found: %s\n", input[0]);
+			else
+				cmd_exec(tmp_path[ok], input, *envcpy);
+		}
 	}
 }
 
@@ -85,9 +88,16 @@ int		ft_default_env(char ***env)
 	return (TRUE);
 }
 
+void	direct_path(char **input, char ***envcpy)
+{
+	(void)envcpy;
+	(void)input;
+	ft_printf("Direct path ! :D");
+}
+
 int		main(int argc, char **argv, char **environ)
 {
-	(void)argc;
+		(void)argc;
 	(void)argv;
 	(void)environ;
 	char *line;
@@ -113,6 +123,8 @@ int		main(int argc, char **argv, char **environ)
 		if (ft_strcmp(line, "\n") > 0)
 		{
 			input = ft_str_to_tab_sep(line, ' ', 0);
+			//if (ft_strchr(input[1], '/') != NULL)
+			//		direct_path(input, &envcpy);
 			tmp_path = ft_tabdup(path);
 			tmp_path = add_bin_to_tab(tmp_path, input[0], data.nb_bin);
 			if (ft_strcmp(line, "exit") == 0)

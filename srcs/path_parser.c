@@ -14,16 +14,13 @@
 
 static int	str_is_in(char *str, char *to_find)
 {
-	int	save;
 	int	i;
 	int	a;
 
 	a = 0;
 	i = 0;
-	save = 0;
 	while (str[i] != '\0')
 	{
-		save = i;
 		while ((str[i] == to_find[a]) && ((str[i] != '\0')
 					|| (to_find[a] != '\0')))
 		{

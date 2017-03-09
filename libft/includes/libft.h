@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <inttypes.h>
 # include "get_next_line.h"
 
 typedef struct	s_list
