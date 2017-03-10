@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/09 14:01:59 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/10 10:29:56 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,6 @@ fclean: clean
 re: fclean all
 
 test:
-	make
-	cat tests/cd | ./minishell
+	make re
 
 .PHONY : all re clean fclean test
