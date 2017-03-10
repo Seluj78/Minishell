@@ -6,7 +6,7 @@
 #    By: jlasne <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 10:25:59 by jlasne            #+#    #+#              #
-#    Updated: 2017/03/10 10:29:56 by jlasne           ###   ########.fr        #
+#    Updated: 2017/03/10 11:10:25 by jlasne           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC =	main.c\
 		cmd_cd.c\
 		sig_handler.c\
 		ft_strmjoin.c\
-		help_funcs.c
+		help_funcs.c\
+		what_cmd.c
 
 OBJ = $(SRC:.c=.o)
 
