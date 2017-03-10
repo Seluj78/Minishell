@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/10 11:12:22 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/10 13:41:03 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int			ft_default_env(char ***env)
 
 static void	main2(t_data *data)
 {
-	data->input = ft_str_to_tab_sep(data->line, ' ', 0);
+	data->input = ft_strsplit(data->line, ' ');
 	data->path_size = ft_tabcount((void**)(size_t)data->path);
-	if (!(data->full_path = get_bintab(data->path, data->path_size, \
-					data->input[0])))
+	if ((!(data->full_path = get_bintab(data->path, data->path_size, \
+						data->input[0]))) && (!data->input))
 		ft_printf("Error");
 	if (ft_strcmp(data->line, "exit") == 0)
 	{
