@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/11 11:31:58 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/11 11:47:49 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			main(int argc, char **argv, char **environ)
 
 	(void)argc;
 	(void)argv;
-	signal(SIGINT, sig_handle);
+	block_sig();
 	if (!environ || !environ[0] || !(data.envcpy = ft_tabdup(environ)))
 		if (!ft_default_env(&data.envcpy))
 			return (ft_printf("ERROR"));
@@ -87,7 +87,7 @@ int			main(int argc, char **argv, char **environ)
 	getcwd(data.cwd, sizeof(data.cwd));
 	data.envcpy = ft_setenv("PWD", data.cwd, data.envcpy);
 	ft_printf("{:blue}[{:lred}Minishell{:blue}] {:lgreen}➜{:reset} ");
-	while (get_next_line(0, &data.line))
+	while ((get_next_line(0, &data.line)))
 	{
 		if (ft_strcmp(data.line, "\n") > 0)
 			main2(&data);

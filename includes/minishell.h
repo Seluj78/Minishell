@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:47:27 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/10 11:14:41 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/11 11:48:13 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				command_setenv(char **argv, char ***env);
 int				command_unsetenv(char **argv, char ***env);
 void			cmd_cd(char **input, char ***env);
 char			**ft_setenv(char *name, char *value, char **env);
-void			sig_handle(int keep);
+void			block_sig(void);
 int				ft_getenv(char *name, char **env);
 char			**do_absolute(void);
 int				str_is_in(char *str, char *to_find);

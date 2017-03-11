@@ -6,25 +6,64 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:20:22 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/09 14:04:52 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/11 13:27:01 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-volatile int g_sig = 1;
-
-void	sig_handle(int keep)
+void	sig_helper(int sig)
 {
-	if (keep)
+	if (sig == 19 || sig == 20)
+		;
+	else if (sig == 11)
 	{
-		g_sig = 0;
-		ft_printf("\nSorry, Minishell cannot be terminated by pressing\n");
-		ft_printf("{:lred}Crtl + C.{:reset}\n");
-		ft_printf("If you wish to exit, please type ");
-		ft_printf("{:lgreen}exit{:reset} and then press {:lblue}Enter");
-		ft_printf("{:reset}\n");
-		ft_printf("Else, Just keep calm and RTFM 😄\n");
-		ft_printf("{:blue}[{:lred}Minishell{:blue}] {:lgreen}➜{:reset} ");
+		ft_printf("\nUser closed file descriptor 0, OEF.\n");
+		exit(EXIT_FAILURE);
 	}
+	else if (sig == 18)
+	{
+		ft_printf("\nCannot stop then resume Minishell, YET\n");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		ft_printf("\nSignal non gere : %d, fin du programme.\n", sig);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	sighandler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_printf("\nUser pressed {:lred}Crtl + C{:reset}: Stopping.\n");
+		exit(EXIT_FAILURE);
+	}
+	else if (sig == SIGQUIT)
+	{
+		ft_printf("\nSignal d'interruption\n");
+		exit(EXIT_FAILURE);
+	}
+	else if (sig == SIGKILL)
+	{
+		ft_printf("\nUser kill the process: Stopping.\n");
+		exit(EXIT_FAILURE);
+	}
+	else if (sig == SIGTERM)
+	{
+		ft_printf("\nTerminaison de programme\n");
+		exit(EXIT_FAILURE);
+	}
+	else
+		sig_helper(sig);
+}
+
+void	block_sig(void)
+{
+	int i;
+
+	i = 0;
+	while (i < 33)
+		signal(i++, sighandler);
 }
