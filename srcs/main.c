@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:49 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/10 13:41:03 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/11 11:31:58 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ static void	main2(t_data *data)
 	data->input = ft_strsplit(data->line, ' ');
 	data->path_size = ft_tabcount((void**)(size_t)data->path);
 	if ((!(data->full_path = get_bintab(data->path, data->path_size, \
-						data->input[0]))) && (!data->input))
+						data->input[0]))))
 		ft_printf("Error");
-	if (ft_strcmp(data->line, "exit") == 0)
+	if (((ft_strcmp(data->line, "exit") == 0)))
 	{
 		free(data->line);
 		exit(EXIT_SUCCESS);
 	}
-	if (ft_strchr(data->input[0], '/') != NULL)
-		direct_path(data->input, &data->envcpy);
-	else
-		what_cmd(data->input, &data->envcpy, data->nb_bin, data->full_path);
+	if (data->input[0] != NULL)
+	{
+		if ((ft_strchr(data->input[0], '/') != NULL))
+			direct_path(data->input, &data->envcpy);
+		else
+			what_cmd(data->input, &data->envcpy, data->nb_bin, data->full_path);
+	}
 	clear_bintab(data->full_path, data->path_size);
 	ft_free_array(data->input);
 }

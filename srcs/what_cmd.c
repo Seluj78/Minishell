@@ -6,7 +6,7 @@
 /*   By: jlasne <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 11:09:40 by jlasne            #+#    #+#             */
-/*   Updated: 2017/03/10 13:32:12 by jlasne           ###   ########.fr       */
+/*   Updated: 2017/03/11 11:25:57 by jlasne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	what_cmd_helper(char **tmp_path, int size, char **input, char ***envcpy)
 
 void	what_cmd(char **input, char ***envcpy, int size, char **tmp_path)
 {
-	ft_printf("lol");
 	if (ft_strcmp(input[0], "cd") == 0)
 		cmd_cd(input, envcpy);
 	else if (ft_strcmp(input[0], "env") == 0)
